@@ -13,7 +13,6 @@ schema:
   description: |
     小鹤双拼+辅助码 https://github.com/gaboolic/rime-shuangpin-fuzhuma
   dependencies:
-    - chaizi
     - radical_flypy
     - stroke
     - emoji
@@ -57,6 +56,7 @@ engine:
     - fallback_segmentor
   translators:
     - punct_translator
+    - table_translator@my_custom_phrase
     - table_translator@custom_phrase
     - table_translator@custom_phrase_kf
     - table_translator@custom_phrase_xhzg
@@ -216,7 +216,7 @@ translator:
 
 custom_phrase:
   dictionary: ""
-  user_dict: custom_phrase
+  user_dict: cn_dicts_xh/custom_phrase
   db_class: stabledb
   enable_completion: false
   enable_sentence: false
@@ -224,7 +224,7 @@ custom_phrase:
 
 custom_phrase_kf:
   dictionary: ""
-  user_dict: custom_phrase_kf
+  user_dict: cn_dicts_xh/custom_phrase_kf
   db_class: stabledb
   enable_sentence: false
   enable_completion: false
@@ -232,11 +232,20 @@ custom_phrase_kf:
 
 custom_phrase_xhzg:
   dictionary: ""
-  user_dict: custom_phrase_xhzg
+  user_dict: cn_dicts_xh/custom_phrase_xhzg
   db_class: stabledb
   enable_sentence: false
   enable_completion: false
   initial_quality: -1 #本表词和系统词重码居后
+
+# 自定义词库
+my_custom_phrase:
+  dictionary: ""
+  user_dict: custom_phrase
+  db_class: stabledb
+  enable_completion: false
+  enable_sentence: true
+  initial_quality: 1
 
 reverse_lookup:
   dictionary: radical_flypy # https://github.com/mirtlecn/rime-radical-pinyin
@@ -253,9 +262,9 @@ reverse_stroke:
   enable_completion: true
   prefix: "ab"
   suffix: "'"
-  tips: 〔筆畫hspnz〕 # 〔筆畫〕
+  tips: 〔筆畫hupnv〕 # 〔筆畫〕
   preedit_format:
-    - xlit/hspnz/一丨丿丶乙/
+    - xlit/hupnv/一丨丿丶乙/
 
 # Emoji
 emoji:
@@ -315,8 +324,6 @@ recognizer:
     ## 拆字、笔画、仓颉:
     reverse_lookup: "^az[a-z]*'?$" # "[[]b[a-z]*'?$"
     reverse_stroke: "^ab[A-Za-z]*$"
-    reverse_cj: "^acj[A-Za-z]*$"
-    reverse_zrlf: "^alf[A-Za-z]*$"
     emojis: "^ae[a-z]*'?$" # "^ae.*$"
     melt_eng: "^aw[a-z]*"
     japanese: "^aj[a-z]*"
@@ -342,7 +349,7 @@ melt_eng:
   enable_sentence: false
   prefix: "aw"
   # suffix: "'"
-  tips: "英文单词（可去元音）"
+  tips: "英文"
   spelling_hints: 9
   comment_format:
     - xform/^.+$//

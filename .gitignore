@@ -27,3 +27,4 @@ build/
 
 # 用户自定义配置
 *.custom.yaml
+custom_phrase.txt

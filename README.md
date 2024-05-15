@@ -1,11 +1,13 @@
 - 打词时插入辅助码：寄宿jisub 极速jimsu
-- `ab` 笔画输入 hspnz横竖撇捺折
+- `ab` 笔画输入
 - `az` 部件组字输入
-- `aw` 开头英文输入
-- `aj` 开头日文输入
+- `ae` emoji输入
+- `aw` 开头英文输入 https://github.com/tumuyan/rime-melt
+- `aj` 开头日文输入 https://github.com/gkovacs/rime-japanese
 - N开头快捷日期输入 eg. N20240515
 - R开头 大写数字 eg. R123
 - U开头unicode输入 eg. u2ffb
 - V开头计算器模式
 - 日期时间相关输入：`date time week` `datetime` `timestamp`
 - 符号输入`/fh`，更多符号查看`symbols.yaml`
+- 
