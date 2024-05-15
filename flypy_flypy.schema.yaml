@@ -279,7 +279,7 @@ mars:
 # punctuator 下面有三个子项：
 #   full_shape 全角标点映射
 #   half_shape 半角标点映射
-#   symbols    Rime 的预设配置是以 '/' 前缀开头输出一系列字符，自定义的 symbols_caps_v.yaml 修改成了 '/' 开头。
+#   symbols    Rime 的预设配置是以 '/' 前缀开头输出一系列字符，自定义的 symbols.yaml 修改成了 '/' 开头。
 
 punctuator:
   full_shape:
@@ -287,7 +287,7 @@ punctuator:
   half_shape:
     __include: default:/punctuator/half_shape  # 从 default.yaml 导入配置
   symbols:
-    __include: symbols_caps_v:/symbols         # 从 symbols_caps_v.yaml 导入配置
+    __include: symbols:/punctuator/symbols         # 从 symbols.yaml 导入配置
 
 key_binder:
   import_preset: default

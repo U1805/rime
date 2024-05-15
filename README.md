@@ -8,4 +8,4 @@
 - U开头unicode输入 eg. u2ffb
 - V开头计算器模式
 - 日期时间相关输入：`date time week` `datetime` `timestamp`
-- 符号输入`/fh`，更多符号查看`symbols_caps_v.yaml`
+- 符号输入`/fh`，更多符号查看`symbols.yaml`
