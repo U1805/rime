@@ -5,20 +5,16 @@ config_version: '0.40'
 
 schema_list:
   - schema: flypy_flypy # 小鹤+鹤形
-  # - schema: zrm_zrm # 自然码+自然码部首辅助码
-  # - schema: moqi_xh # 墨奇码鹤拼版
-  # - schema: moqi_zrm # 墨奇码自然双拼版
-  #- schema: moqi_single_xh # 墨奇码·单字版·小鹤
-  # - schema: moqi_sogou # 墨奇码搜狗双拼版
-  # - schema: moqi_ms # 墨奇码微软双拼版
-  # - schema: flypy_bingji # 并击
+  - schema: japanese
+  - schema: melt_eng
 
 switcher:
   caption: 〔方案選單〕
   hotkeys:
-    - Control+grave
-    - Control+Shift+grave
-    - F4
+    # - Control+grave
+    # - Control+Shift+grave
+    # - F4
+    - Control+Shift+space
   save_options:
     - ascii_mode
     - full_shape
@@ -40,16 +36,20 @@ punctuator:
 
 key_binder:
   bindings:
+    - { when: has_menu, accept: Control+j, send: Page_Down } # vim 风格选词
+    - { when: has_menu, accept: Control+k, send: Page_Up }   # vim 风格选词
+    - { when: has_menu, accept: Control+h, send: Up }        # vim 风格选词
+    - { when: has_menu, accept: Control+l, send: Down }      # vim 风格选词
     # Tab / Shift+Tab 切换光标至下/上一个拼音
-    - { when: composing, accept: Shift+Tab, send: Shift+Left }
-    - { when: composing, accept: Tab, send: Shift+Right }
+    # - { when: composing, accept: Shift+Tab, send: Shift+Left }
+    # - { when: composing, accept: Tab, send: Shift+Right }
     # Tab / Shift+Tab 翻页
     # - { when: has_menu, accept: Shift+Tab, send: Page_Up }
     # - { when: has_menu, accept: Tab, send: Page_Down }
 
     # Option/Alt + ←/→ 切换光标至下/上一个拼音
-    - { when: composing, accept: Alt+Left, send: Shift+Left }
-    - { when: composing, accept: Alt+Right, send: Shift+Right }
+    # - { when: composing, accept: Alt+Left, send: Shift+Left }
+    # - { when: composing, accept: Alt+Right, send: Shift+Right }
 
     # 翻页 - =
     - { when: has_menu, accept: minus, send: Page_Up }
@@ -69,22 +69,22 @@ key_binder:
     # - { when: always, select: .next, accept: Control+Shift+exclam }             # 在最近的两个方案之间切换
     # - { when: always, toggle: ascii_mode, accept: Control+Shift+2 }             # 切换中英
     # - { when: always, toggle: ascii_mode, accept: Control+Shift+at }            # 切换中英
-    - { when: always, toggle: ascii_punct, accept: Control+Shift+3 }              # 切换中英标点
-    - { when: always, toggle: ascii_punct, accept: Control+Shift+numbersign }     # 切换中英标点
-    - { when: always, toggle: traditionalization, accept: Control+Shift+4 }       # 切换简繁
-    - { when: always, toggle: traditionalization, accept: Control+Shift+dollar }  # 切换简繁
+    # - { when: always, toggle: ascii_punct, accept: Control+Shift+3 }              # 切换中英标点
+    # - { when: always, toggle: ascii_punct, accept: Control+Shift+numbersign }     # 切换中英标点
+    # - { when: always, toggle: traditionalization, accept: Control+Shift+4 }       # 切换简繁
+    # - { when: always, toggle: traditionalization, accept: Control+Shift+dollar }  # 切换简繁
     # - { when: always, toggle: full_shape, accept: Control+Shift+5 }             # 切换全半角
     # - { when: always, toggle: full_shape, accept: Control+Shift+percent }       # 切换全半角
 
     # emacs_editing:
-    # - { when: composing, accept: Control+p, send: Up }
-    # - { when: composing, accept: Control+n, send: Down }
-    # - { when: composing, accept: Control+b, send: Left }
-    # - { when: composing, accept: Control+f, send: Right }
+    - { when: composing, accept: Control+p, send: Up }
+    - { when: composing, accept: Control+n, send: Down }
+    - { when: composing, accept: Control+b, send: Left }
+    - { when: composing, accept: Control+f, send: Right }
     # - { when: composing, accept: Control+a, send: Home }
     # - { when: composing, accept: Control+e, send: End }
     # - { when: composing, accept: Control+d, send: Delete }
-    - { when: composing, accept: Control+k, send: Shift+Delete }
+    # - { when: composing, accept: Control+k, send: Shift+Delete }
     # - { when: composing, accept: Control+h, send: BackSpace }
     # - { when: composing, accept: Control+g, send: Escape }
     # - { when: composing, accept: Control+bracketleft, send: Escape }
@@ -127,9 +127,14 @@ recognizer:
 ascii_composer:
   good_old_caps_lock: true
   switch_key:
-    Shift_L: inline_ascii
-    Shift_R: commit_text
-    Control_L: noop
+    # Shift_L: inline_ascii
+    # Shift_R: commit_text
+    # Control_L: noop
+    # Control_R: noop
+    # Caps_Lock: clear
+    # Eisu_toggle: clear
+    Shift_L: commit_code   # 按 shift 键，已输入字符上屏，同时切换为英文输入
+    Shift_R: commit_code
+    Control_L: noop        # 无操作
     Control_R: noop
-    Caps_Lock: clear
-    Eisu_toggle: clear
+    Caps_Lock: clear       # 按大小写切换键，清除已输入字符，同时切换为英文输入

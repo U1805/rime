@@ -10,8 +10,10 @@ schema:
     - Functoreality
     - Dvel
     - gaboolic （裁缝)
+    - Modified by dai0v0
   description: |
     小鹤双拼+辅助码 https://github.com/gaboolic/rime-shuangpin-fuzhuma
+    稍微的改了一下（小声
   dependencies:
     - radical_flypy
     - stroke
@@ -21,18 +23,19 @@ schema:
 
 switches:
   - name: ascii_mode
-    states: [ 中文, 西文 ]
+    states: [ 文, A ]
   - name: full_shape
-    states: [ 半角, 全角 ]
+    states: [ $, ￥ ]
   - name: traditionalization
     states: [ 简, 繁 ]
   - name: emoji
+    reset: 0 # 默认状态: 0 关闭 1 开启
     states: [ 💀, 😄 ]
   - name: mars
     reset: 0
     states: [ 地, 煋 ] #火星文
-  - name: ascii_punct
-    states: [ 。，, ．， ]
+  # - name: ascii_punct
+  #   states: [ 。，, ．， ]
 
 engine:
   processors:
@@ -75,7 +78,7 @@ engine:
   filters:
     - lua_filter@long_word_filter       # 长词优先（顺序要求：长词优先 > Emoji）
     - simplifier@emoji                  # Emoji
-    # - lua_filter@reduce_emoji_filter   # 按需启用，作用是降低Emoji在候选项中的位置排序(顺序要求：Emoji > 降低排序)
+    - lua_filter@reduce_emoji_filter   # 按需启用，作用是降低Emoji在候选项中的位置排序(顺序要求：Emoji > 降低排序)
     - simplifier@traditionalize         # 简繁切换
     - simplifier@mars                   #火星文
     - uniquifier
@@ -163,7 +166,7 @@ speller:
     # - derive/^([rgv])c/$1n/
 
 translator:
-  dictionary: flypy_flypy.extended
+  dictionary: flypy_flypy
   enable_completion: false
   ##  默认为不超过 2 个字的候选项显示输入码；将 2 改为 0 可关闭编码提示，
   ##  改为 1 则是只显示单字的输入码，依此类推。
@@ -171,7 +174,7 @@ translator:
   comment_format:
     - "xform/(^|[ '])[^[]+[[]/$1/" ## 编码提示只显示辅助码部分
 
-  enable_user_dict: false # 是否开启自动调频
+  enable_user_dict: true # 是否开启自动调频
   preedit_format:
     # 复制用户输入, 一份转大写保持原样, 一份由正则转为全拼显示
     # - xform/(^.*$)/\U$1\E\t => $1 <=/
@@ -247,6 +250,9 @@ my_custom_phrase:
   enable_sentence: true
   initial_quality: 1
 
+grammar:
+  language: zh-hans-t-essay-bgw
+
 reverse_lookup:
   dictionary: radical_flypy # https://github.com/mirtlecn/rime-radical-pinyin
   enable_completion: true
@@ -275,8 +281,8 @@ emoji:
 # 简繁切换
 traditionalize:
   option_name: traditionalization
-  opencc_config: s2t.json  # s2t.json | s2hk.json | s2tw.json | s2twp.json
-  tips: none               # 转换提示: all 都显示 | char 仅单字显示 | none 不显示。
+  opencc_config: s2tw.json  # s2t.json | s2hk.json | s2tw.json | s2twp.json
+  tips: char               # 转换提示: all 都显示 | char 仅单字显示 | none 不显示。
   tags: [ abc, number, gregorian_to_lunar ]  # 限制在对应 tag，不对其他如反查的内容做简繁转换# 火星文切换
 
 # 火星文切换
@@ -301,7 +307,9 @@ punctuator:
 key_binder:
   import_preset: default
   bindings:
-    #- { when: composing, accept: Tab, send: '[' } ## 取消注释后：tab引导辅助码
+    - { when: always, accept: Control+1, toggle: emoji } # 切换是否显示 Emoji
+    - { when: always, accept: Control+2, toggle: traditionalization } # 切换简繁
+    - { when: composing, accept: Tab, send: '[' } ## 取消注释后：tab引导辅助码
     # - { when: composing, accept: Control+m, send: Return }
     # - { when: composing, accept: Control+w, send: Control+BackSpace }
     # - { when: has_menu, accept: semicolon, send: 2 }
@@ -319,9 +327,8 @@ recognizer:
   # import_preset: default
   patterns:
     uppercase: "^[A-Z].*$"
-    #punct: '^/[0-9A-Za-z]+$' # 此正则无法使用1~0进行快速选择
     punct: '^/[0-9A-z][0A-z]?[A-z]?+$' # 此正则在/+数字的情况下只能通过1~9进行快速选择，而不能使用0，其余情况皆为正常
-    ## 拆字、笔画、仓颉:
+    ## 拆字、笔画:
     reverse_lookup: "^az[a-z]*'?$" # "[[]b[a-z]*'?$"
     reverse_stroke: "^ab[A-Za-z]*$"
     emojis: "^ae[a-z]*'?$" # "^ae.*$"
@@ -330,9 +337,6 @@ recognizer:
     unicode: "^U[a-f0-9]+"              # 脚本将自动获取第 2 个字符 U 作为触发前缀，响应 lua_translator@unicode，输出 Unicode 字符
     number: "^R[0-9]+[.]?[0-9]*"        # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@number_translator，数字金额大写
     gregorian_to_lunar: "^N[0-9]{1,8}"  # 脚本将自动获取第 2 个字符 N 作为触发前缀，响应 lua_translator@lunar，公历转农历，输入 N20240115 得到「二〇二三年腊月初五」
-
-menu:
-  page_size: 9 # 使用上面默认punct正则时，page_size为10，会有`/+数字`无法使用0进行快速选择的情况
 
 emojis:
   tag: emojis

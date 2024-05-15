@@ -9,5 +9,5 @@
 - U开头unicode输入 eg. u2ffb
 - V开头计算器模式
 - 日期时间相关输入：`date time week` `datetime` `timestamp`
-- 符号输入`/fh`，更多符号查看`symbols.yaml`
-- 
+- 符号输入`/help`，支持常用 Latex 符号
+- 好看的皮肤 https://github.com/LufsX/rime
