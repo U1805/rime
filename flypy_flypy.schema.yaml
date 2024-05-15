@@ -4,7 +4,7 @@
 
 schema:
   schema_id: flypy_flypy
-  name: 小鹤双拼+鹤形辅助
+  name: 小鹤双拼
   version: "2024-04-24"
   author:
     - Functoreality
@@ -20,6 +20,7 @@ schema:
     - emoji
     - melt_eng
     - japanese
+    - chaizi
 
 switches:
   - name: ascii_mode
@@ -65,7 +66,6 @@ engine:
     - table_translator@custom_phrase_xhzg
     - reverse_lookup_translator
     - reverse_lookup_translator@reverse_stroke
-    - reverse_lookup_translator@reverse_zrlf
     - script_translator
     - lua_translator@date_translator    # 时间、日期、星期
     - lua_translator@lunar              # 农历
@@ -106,9 +106,9 @@ long_word_filter:
 
 speller:
   # 如果不想让什么标点直接上屏，可以加在 alphabet，或者编辑标点符号为两个及以上的映射
-  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA[
+  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/[
   # initials 定义仅作为始码的按键，排除 ` 让单个的 ` 可以直接上屏
-  initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA
+  initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/
   # 第一位<空格>是拼音之间的分隔符；第二位<'>表示可以手动输入单引号来分割拼音。
   delimiter: " '"
   ## speller 未允许 aj 表示 an
@@ -154,16 +154,6 @@ speller:
     - derive/^(..[[].).+$/$1/
     # - derive/^([jqxy])u/$1v/
     - derive/[[]//
-
-    ## 飞键 可选择性开启
-    # - derive/^([yh])j/$1q/
-    # - derive/^qx/qw/
-    # - derive/^jn/jv/
-    # - derive/^mn/mv/
-    # - derive/^jm/jz/
-    # - derive/^([y])h/$1g/
-    # - derive/^([rgv])f/$1m/
-    # - derive/^([rgv])c/$1n/
 
 translator:
   dictionary: flypy_flypy
@@ -268,9 +258,9 @@ reverse_stroke:
   enable_completion: true
   prefix: "ab"
   suffix: "'"
-  tips: 〔筆畫hupnv〕 # 〔筆畫〕
+  tips: 〔筆畫hspnz〕 # 〔筆畫〕
   preedit_format:
-    - xlit/hupnv/一丨丿丶乙/
+    - xlit/hspnz/一丨丿丶乙/
 
 # Emoji
 emoji:
@@ -309,7 +299,7 @@ key_binder:
   bindings:
     - { when: always, accept: Control+1, toggle: emoji } # 切换是否显示 Emoji
     - { when: always, accept: Control+2, toggle: traditionalization } # 切换简繁
-    - { when: composing, accept: Tab, send: '[' } ## 取消注释后：tab引导辅助码
+    # - { when: composing, accept: Tab, send: '[' } ## 取消注释后：tab引导辅助码
     # - { when: composing, accept: Control+m, send: Return }
     # - { when: composing, accept: Control+w, send: Control+BackSpace }
     # - { when: has_menu, accept: semicolon, send: 2 }
@@ -354,18 +344,18 @@ melt_eng:
   prefix: "aw"
   # suffix: "'"
   tips: "英文"
-  spelling_hints: 9
+  spelling_hints: 5
   comment_format:
     - xform/^.+$//
 
 japanese:
   tag: japanese
   dictionary: japanese
-  enable_completion: true
-  enable_sentence: false
+  enable_completion: false
+  enable_sentence: true
   prefix: "aj"
   # suffix: "'"
   tips: "日语"
-  spelling_hints: 9
+  spelling_hints: 5
   comment_format:
     - xform/^.+$//

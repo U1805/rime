@@ -8,7 +8,6 @@ schema:
   version: 'v0.3'
   author:
     - ensigma96 <ensigma96@gmail.com>
-    - Modified by dai0v0
   dependencies:
     - stroke
 
@@ -67,10 +66,8 @@ speller:
 key_binder:
   import_preset: default
   bindings:
-    # - { when: always, accept: Control+minus, select: dai0v0_flypy } 
-    # - { when: always, accept: Control+equal, select: melt_eng }
-    # - { when: has_menu, accept: bracketleft, send: Page_Up }      # [] 翻页
-    # - { when: has_menu, accept: bracketright, send: Page_Down }
+    - { when: has_menu, accept: bracketleft, send: Page_Up }      # [] 翻页
+    - { when: has_menu, accept: bracketright, send: Page_Down }
 
 translator:
   dictionary: japanese

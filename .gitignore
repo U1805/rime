@@ -26,5 +26,5 @@ build/
 *.userdb/
 
 # 用户自定义配置
-*.custom.yaml
+/default.custom.yaml
 /custom_phrase.txt

@@ -1,0 +1,10 @@
+patch:
+  app_options: # 设置为在以下列表软件中，RIME 默认为英文模式
+    cmd.exe:
+      ascii_mode: true
+    conhost.exe:
+      ascii_mode: true
+    photoshop.exe: 
+      ascii_mode: true
+    code.exe: 
+      ascii_mode: true
