@@ -1,6 +1,6 @@
 # Rime schema
 # encoding: utf-8
-# https://github.com/gaboolic/rime-shuangpin-fuzhuma
+# https://github.com/u1805/rime
 
 schema:
   schema_id: flypy_flypy
@@ -15,12 +15,13 @@ schema:
     小鹤双拼+辅助码 https://github.com/gaboolic/rime-shuangpin-fuzhuma
     稍微的改了一下（小声
   dependencies:
-    - radical_flypy
     - stroke
+    - chaizi
+    - radical_flypy
     - emoji
     - melt_eng
     - japanese
-    - chaizi
+    - pinyin_simp
 
 switches:
   - name: ascii_mode
@@ -54,7 +55,7 @@ engine:
     - abc_segmentor
     - punct_segmentor
     - affix_segmentor@emojis
-    - affix_segmentor@verbatim ## not as the last of this list
+    - affix_segmentor@pinyin
     - affix_segmentor@melt_eng
     - affix_segmentor@japanese
     - fallback_segmentor
@@ -67,20 +68,21 @@ engine:
     - reverse_lookup_translator
     - reverse_lookup_translator@reverse_stroke
     - script_translator
+    - script_translator@pinyin
+    - script_translator@emojis           # 添加注释后：停用ae模式emoji输入
+    - script_translator@melt_eng         # 添加注释后：停用单词输入
+    - script_translator@japanese         # 添加注释后：停用日语输入
     - lua_translator@date_translator    # 时间、日期、星期
     - lua_translator@lunar              # 农历
-    - table_translator@emojis           # 添加注释后：停用ae模式emoji输入
-    - table_translator@melt_eng         # 添加注释后：停用单词输入
-    - table_translator@japanese         # 添加注释后：停用日语输入
     - lua_translator@unicode            # Unicode
     - lua_translator@number_translator  # 数字、金额大写
     - lua_translator@calc_translator    # 计算器
   filters:
     - lua_filter@long_word_filter       # 长词优先（顺序要求：长词优先 > Emoji）
     - simplifier@emoji                  # Emoji
-    - lua_filter@reduce_emoji_filter   # 按需启用，作用是降低Emoji在候选项中的位置排序(顺序要求：Emoji > 降低排序)
+    - lua_filter@reduce_emoji_filter    # 按需启用，作用是降低Emoji在候选项中的位置排序(顺序要求：Emoji > 降低排序)
     - simplifier@traditionalize         # 简繁切换
-    - simplifier@mars                   #火星文
+    - simplifier@mars                   # 火星文
     - uniquifier
 
 # 计算器触发关键字
@@ -281,18 +283,8 @@ mars:
   option_name: mars
 
 # 标点符号
-# punctuator 下面有三个子项：
-#   full_shape 全角标点映射
-#   half_shape 半角标点映射
-#   symbols    Rime 的预设配置是以 '/' 前缀开头输出一系列字符，自定义的 symbols.yaml 修改成了 '/' 开头。
-
 punctuator:
-  full_shape:
-    __include: default:/punctuator/full_shape  # 从 default.yaml 导入配置
-  half_shape:
-    __include: default:/punctuator/half_shape  # 从 default.yaml 导入配置
-  symbols:
-    __include: symbols:/punctuator/symbols         # 从 symbols.yaml 导入配置
+  import_preset: symbols
 
 key_binder:
   import_preset: default
@@ -311,14 +303,14 @@ key_binder:
 recognizer:
   # import_preset: default
   patterns:
-    uppercase: "^[A-Z].*$"
-    punct: '^/[0-9A-z][0A-z]?[A-z]?+$' # 此正则在/+数字的情况下只能通过1~9进行快速选择，而不能使用0，其余情况皆为正常
+    punct: "^/([0-9]0?|[A-Za-z]+)$" # 响应 symbols.yaml 内的输入
     ## 拆字、笔画:
     reverse_lookup: "^az[a-z]*'?$" # "[[]b[a-z]*'?$"
     reverse_stroke: "^ab[A-Za-z]*$"
     emojis: "^ae[a-z]*'?$" # "^ae.*$"
     melt_eng: "^aw[a-z]*"
     japanese: "^aj[a-z]*"
+    pinyin: "^ap[a-z]*'?$"
     unicode: "^U[a-f0-9]+"              # 脚本将自动获取第 2 个字符 U 作为触发前缀，响应 lua_translator@unicode，输出 Unicode 字符
     number: "^R[0-9]+[.]?[0-9]*"        # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@number_translator，数字金额大写
     gregorian_to_lunar: "^N[0-9]{1,8}"  # 脚本将自动获取第 2 个字符 N 作为触发前缀，响应 lua_translator@lunar，公历转农历，输入 N20240115 得到「二〇二三年腊月初五」
@@ -354,3 +346,13 @@ japanese:
   spelling_hints: 5
   comment_format:
     - xform/^.+$//
+
+pinyin:
+  tag: pinyin
+  prism: pinyin_simp
+  dictionary: pinyin_simp ## 用户可自行改为扩展后的词典
+  enable_completion: false
+  enable_sentence: true
+  prefix: "ap"
+  suffix: "'"
+  tips: "〔全拼〕"

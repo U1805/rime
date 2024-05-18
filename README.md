@@ -8,8 +8,9 @@
 - `ab` 笔画输入（反查）eg. 木`abhspn`
 - `az` 部件组字输入（反查）eg. 晶`azririri`
 - `ae` emoji输入 (支持双拼、英文) eg. 🐧`aedswu`/`aeanimal`
-- `aw` 开头[英文输入](https://github.com/tumuyan/rime-melt) eg. hello`awhello`
+- `aw` 开头[英文输入](https://github.com/tumuyan/rime-melt) eg. myGo`awmygo`
 - `aj` 开头[日文输入](https://github.com/gkovacs/rime-japanese) eg. 春日影`ajharuhikage` 
+- `ap` 开头临时[全拼](https://github.com/iDvel/rime-ice) eg. 炸梦我去`apzhamengwoqu`
 - N开头农历输入 eg. 二〇二四年四月初八`N20240515`
 - R开头大写数字 eg. 拾壹萬肆仟伍佰壹拾肆`R114514`
 - U开头Unicode输入 eg. ⿻`U2ffb`
@@ -18,14 +19,13 @@
 - `ctrl+1` emoji 开关；`ctrl+2` 简繁开关
 - 三字词，用e引导简码，简码取声母，eg. 阿波罗`eabl`, 差不多`eibd`, 巴不得`ebbd`。
 - 多字词，用e引导简码，简码取前3+末字声母，eg. 当仁不让`edrbr`, 兵败如山倒`ebbrd`, 天有不测风云`etyby`
-- 日期时间相关输入：`date time week` `datetime` `timestamp`
-- 符号输入`/`开头，支持[常用 Latex 符号](https://github.com/wklchris/Rime-latex-symbols) 
-- 好看的皮肤 https://github.com/LufsX/rime
+- 日期时间相关输入：`date time week` `datetime` `timestamp` `anl`
+- 符号输入`/`开头，`/help` 查看帮助，另支持[常用 Latex 符号](https://github.com/wklchris/Rime-latex-symbols) 
+- 好看的皮肤 [win11_preset](https://github.com/LufsX/rime)
 
 ## Usage
 
-- 方案选单：`Control+space` （原始的 Control+grave 与 vscode 打开终端冲突）
-- 切换方案：`Control+Shift+space`
+- 方案选单：`Control+Shift+space` （原始的 Control+grave 与 vscode 打开终端冲突）
 - 翻页: 
   - `- =`
   - `[ ]`
@@ -53,5 +53,6 @@
 - emoji: ae 输入 emoji
 - japanese: aj 输入日语
 - melt_eng: aw 输入英语
+- pinyin_simp: ap 输入全拼
 - chaizi: 部首组字
 - radical_flypy: 部首组字
