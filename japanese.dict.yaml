@@ -9,3 +9,4 @@ import_tables:
   - dicts_jp/japanese.mozc
   - dicts_jp/japanese.jmdict
   - dicts_jp/japanese.kana
+  - dicts_jp/japanese.custom
