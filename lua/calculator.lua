@@ -27,7 +27,7 @@ local function random(...)
   return math.random(...)
 end
 -- 注册到函数表中
-calcPlugin["rdm"] = random
+calcPlugin["random"] = random
 
 -- 正弦
 local function sin(x)

@@ -63,11 +63,17 @@ function M.func(input, seg, env)
                     file:close()
 
                     local tip = string.format("已保存[%s %s]", history_str, inpu)
-
                     yield(Candidate("pin", seg.start, seg._end, inpu , tip))
+
+                    -- todo 获取deployer路径进行隐式自动部署
+                    -- local script = "WeaselDeployer.exe /deploy"
+                    -- os.execute(script)
                 end
             elseif ( string.sub(input, -1)  == "/") then
-                yield(Candidate("pin", seg.start, seg._end, inpu , " /保存"))
+                local context = env.engine.context
+                local history_str = context.commit_history:latest_text()
+                local tip = string.format("/保存[%s %s]", history_str, inpu)
+                yield(Candidate("pin", seg.start, seg._end, inpu , tip))
             end
         end
     end
