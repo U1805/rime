@@ -26,6 +26,9 @@ calc_translator = require("calculator")
 -- emoji降低排序位置
 reduce_emoji_filter = require("reduce_emoji_filter")
 
+-- 乱七八糟的功能
+melt = require("melt")
+
 -- filters:
 
 -- 错音错字提示

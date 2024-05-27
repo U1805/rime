@@ -16,11 +16,12 @@
 - U开头Unicode输入 eg. ⿻`U2ffb`
 - V开头计算器模式 eg. 1+1=2`V1+1`
 - o开头，快速输入各种符号偏旁部件 [小鹤 · 符号](https://flypy.cc/#/fh)
-- `ctrl+1` emoji 开关；`ctrl+2` 简繁开关
+- `ctrl+1` emoji 开关；`ctrl+2` 简繁开关；`ctrl+3` 中英词典开关
 - 三字词，用e引导简码，简码取声母，eg. 阿波罗`eabl`, 差不多`eibd`, 巴不得`ebbd`。
 - 多字词，用e引导简码，简码取前3+末字声母，eg. 当仁不让`edrbr`, 兵败如山倒`ebbrd`, 天有不测风云`etyby`
 - 日期时间相关输入：`date time week` `datetime` `timestamp` `anl`
-- 符号输入`/`开头，`/help` 查看帮助，另支持[常用 Latex 符号](https://github.com/wklchris/Rime-latex-symbols) 
+- 符号输入 `/`开头，`/help` 查看帮助，另支持[常用 Latex 符号](https://github.com/wklchris/Rime-latex-symbols) 
+- 自定义词 `//` 结尾，加入到 `custom_phrase.txt` 中，eg. 输入 `琴音` 然后输入 `kotone//` 下次部署就有词了
 - 好看的皮肤 [win11_preset](https://github.com/LufsX/rime)
 
 ## Usage
