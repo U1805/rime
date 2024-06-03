@@ -17,6 +17,7 @@ function M.init(env)
     M.week = config:get_string(env.name_space .. '/week') or 'xq'
     M.datetime = config:get_string(env.name_space .. '/datetime') or 'dt'
     M.timestamp = config:get_string(env.name_space .. '/timestamp') or 'ts'
+    M.month = config:get_string(env.name_space .. '/month') or 'yf'
 end
 
 function M.func(input, seg, env)
@@ -56,6 +57,13 @@ function M.func(input, seg, env)
     elseif (input == M.timestamp) then
         local current_time = os.time()
         yield_cand(seg, string.format('%d', current_time))
+
+    -- 月份（英文，示例 June）
+    elseif (input == M.month) then
+        yield_cand(seg, os.date("%B"))
+        yield_cand(seg, os.date("%b"))
+        local month = os.date('%m', os.time())
+        yield_cand(seg, tonumber(month) .. "月")
     end
 
     -- -- 显示内存

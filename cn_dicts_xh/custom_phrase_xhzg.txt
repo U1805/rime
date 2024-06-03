@@ -67,9 +67,8 @@
 日	obo	100
 月	obo	99
 目	obo	98
-衤	obp	101
 礻	obp	100
-丿	obp	99
+衤	obp	99
 犭	obq	100
 求	obq	99
 具其上部	obq	98

@@ -35,6 +35,8 @@ switches:
   - name: mars
     reset: 0
     states: [ 地, 煋 ] #火星文
+  - name: others
+    reset: 1
   # - name: ascii_punct
   #   states: [ 。，, ．， ]
 
@@ -84,6 +86,7 @@ engine:
     - simplifier@chinese_english
     - simplifier@traditionalize         # 简繁切换
     - simplifier@mars                   # 火星文
+    - simplifier@others                  # 月份星期/符号/部首/人名/生僻字...
     - uniquifier
 
 # 计算器触发关键字
@@ -97,6 +100,7 @@ date_translator:
   week: week            # 星期： 星期二
   datetime: datetime    # ISO 8601： 2022-11-29T18:13:11+08:00
   timestamp: timestamp  # 时间戳： 1669716794
+  month: month          # 月份： June/Jun
 
 melt:
   uuid: uuid
@@ -193,7 +197,7 @@ reverse_stroke:
   enable_completion: true
   prefix: "ab"
   suffix: "'"
-  tips: 〔筆畫hspnz〕 # 〔筆畫〕
+  tips: 〔笔画hspnz〕 # 〔筆畫〕
   preedit_format:
     - xlit/hspnz/一丨丿丶乙/
 
@@ -223,6 +227,11 @@ chinese_english:
   comment_format:
     - "xform/-/ /"
 
+# Ohters
+others:
+  option_name: others
+  opencc_config: others.json
+
 # 标点符号
 punctuator:
   import_preset: symbols
@@ -230,10 +239,10 @@ punctuator:
 key_binder:
   import_preset: default
   bindings:
-    - { when: always, accept: Control+1, toggle: emoji } # 切换是否显示 Emoji
+    - { when: always, accept: Control+1, toggle: emoji }              # 切换是否显示 Emoji
     - { when: always, accept: Control+2, toggle: traditionalization } # 切换简繁
-    - { when: composing, accept: Tab, send: '`' } ## 取消注释后：tab引导辅助码
-    - { when: has_menu, accept: Control+3, toggle: chinese_english }
+    - { when: always, accept: Control+3, toggle: chinese_english }    # 中英互译
+    - { when: composing, accept: Tab, send: '`' }                     # tab引导辅助码
     # - { when: has_menu, accept: semicolon, send: 2 }
     # - { when: has_menu, accept: slash, send: 3 }
     ## 对以下4行取消注释后：启用光标回退至特定音节后、补充辅助码的功能
@@ -245,15 +254,17 @@ key_binder:
 recognizer:
   # import_preset: default
   patterns:
-    uppercase: "^[A-Z].*$" # 计算器需要用！
     punct: "^/([0-9]0?|[A-Za-z]+)$" # 响应 symbols.yaml 内的输入
     ## 拆字、笔画:
     reverse_lookup: "^az[a-z]*'?$" # "[[]b[a-z]*'?$"
     reverse_stroke: "^ab[A-Za-z]*$"
+    ## 临时输入
     emojis: "^ae[a-z]*'?$"
-    melt_eng: "^aw[a-z]*"
+    melt_eng: "^aw[A-Za-z]*"
     japanese: "^aj[a-z]*"
     pinyin: "^ap[a-z]*'?$"
+    ## 功能
+    calculator: "^V.*$"                 # 计算器需要用
     unicode: "^U[a-f0-9]+"              # 脚本将自动获取第 2 个字符 U 作为触发前缀，响应 lua_translator@unicode，输出 Unicode 字符
     number: "^R[0-9]+[.]?[0-9]*"        # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@number_translator，数字金额大写
     gregorian_to_lunar: "^N[0-9]{1,8}"  # 脚本将自动获取第 2 个字符 N 作为触发前缀，响应 lua_translator@lunar，公历转农历，输入 N20240115 得到「二〇二三年腊月初五」
@@ -264,7 +275,7 @@ emojis:
   enable_completion: true
   prefix: "ae"
   suffix: "'"
-  tips: " Emoji"
+  tips: "〔Emoji〕"
 
 melt_eng:
   tag: melt_eng
