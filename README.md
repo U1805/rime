@@ -12,7 +12,7 @@
 - `ab` 开头笔画输入（反查）
 > eg. 木 `abhspn`
 
-- `az` 开头部件组字输入（反查）
+- `az` 开头[部件组字](https://github.com/mirtlecn/rime-radical-pinyin)输入（反查）
 > eg. 晶 `azririri`
 
 - `ae` 开头 emoji 输入；`E` 开头输入 emoji 总类

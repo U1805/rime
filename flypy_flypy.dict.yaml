@@ -27,18 +27,22 @@ import_tables:
   - cn_dicts_xh/ext      # 扩展词库
   # - cn_dicts_xh/others   # 一些杂项 容错音和错字 可以不开
 
-  - cn_dicts_common/tencent  # 腾讯词向量（大词库，部署时间较长）
-  - cn_dicts_common/user # 用户自定义词典
-  - cn_dicts_common/chengyu   # 成语
-  - cn_dicts_common/changcijian   # 多字
-  - cn_dicts_common/changcijian3   # 3字
+  - cn_dicts_common/tencent         # 腾讯词向量（大词库，部署时间较长）
+  - cn_dicts_common/user            # 用户自定义词典
+  - cn_dicts_common/chengyu         # 成语
+  - cn_dicts_common/changcijian     # 多字
+  - cn_dicts_common/changcijian3    # 3字
   
-  # - cn_dicts_cell/luna_pinyin.poetry    # 细胞词库 古诗文
-  # - cn_dicts_cell/luna_pinyin.place  # 细胞词库 地名
-  - cn_dicts_cell/luna_pinyin.computer
-  # - cn_dicts_cell/luna_pinyin.history
+  # 细胞词库 https://github.com/Bambooin/rimerc
+  # - cn_dicts_cell/luna_pinyin.poetry    # 古诗文
+  # - cn_dicts_cell/luna_pinyin.place     # 地名
+  - cn_dicts_cell/luna_pinyin.computer    # 计算机
+  - cn_dicts_cell/luna_pinyin.anime       # 动漫
+  - cn_dicts_cell/luna_pinyin.cn_en       # 中英
+  # - cn_dicts_cell/luna_pinyin.history   # 历史
+
   # - cn_dicts_cell/thuocl_animal
-  - cn_dicts_cell/thuocl_caijing
+  - cn_dicts_cell/thuocl_caijing          
   - cn_dicts_cell/thuocl_food
   - cn_dicts_cell/thuocl_idiom
   - cn_dicts_cell/thuocl_IT
