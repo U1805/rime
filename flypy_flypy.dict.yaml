@@ -29,9 +29,7 @@ import_tables:
 
   - cn_dicts_common/tencent         # 腾讯词向量（大词库，部署时间较长）
   - cn_dicts_common/user            # 用户自定义词典
-  - cn_dicts_common/chengyu         # 成语
-  - cn_dicts_common/changcijian     # 多字
-  - cn_dicts_common/changcijian3    # 3字
+  # - cn_dicts_common/chengyu         # 成语
   
   # 细胞词库 https://github.com/Bambooin/rimerc
   # - cn_dicts_cell/luna_pinyin.poetry    # 古诗文

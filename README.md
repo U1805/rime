@@ -43,14 +43,6 @@
 - V开头[计算器模式 ](https://github.com/gaboolic/rime-shuangpin-fuzhuma/blob/main/md/calc.md)
 > eg. 1+1=2 `V1+1`，`Vrandom()`
 
-- e开头引导简码
-> 三字词，用e引导简码，简码取声母  
-> eg. 阿波罗 `eabl`, 差不多 `eibd`, 巴不得 `ebbd`
-> 
-> 多字词，用e引导简码，简码取前3+末字声母  
-> eg. 当仁不让 `edrbr`, 兵败如山倒 `ebbrd`, 天有不测风云 `etyby`
-
-
 - o开头快速输入各种符号偏旁部件 [小鹤 · 符号](https://flypy.cc/#/fh)
 - 日期时间相关：`date` `time` `week` `datetime` `timestamp` `anl` `month`
 - 生成 UUID：`uuid`
