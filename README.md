@@ -1,8 +1,12 @@
-# 小鹤双拼+鹤形辅助+英日输入
+# Rime
 
-基于 [墨奇音形](https://github.com/gaboolic/rime-shuangpin-fuzhuma) 修改
+![](./image.jpg)
 
-## Feature
+本配置方案基于 [墨奇音形](https://github.com/gaboolic/rime-shuangpin-fuzhuma) 修改
+
+小鹤双拼+鹤形辅助+英日输入
+
+## 特性
 
 - 打词时插入鹤形作辅助码 
 > eg. 寄宿 `jisub` 极速 `jimsu` 
@@ -50,11 +54,12 @@
 - 自定义词 `//` 结尾，加入到 `custom_phrase.txt` 中，eg. 输入 `高松灯` 然后输入 `tomori//` 下次部署就有词了
 - 好看的皮肤 [win11_preset](https://github.com/LufsX/rime)
 
-## Usage
+## 按键绑定
 
 - 方案选单：`Control+Shift+space` （原始的 Control+grave 与 vscode 打开终端冲突）
-- `ctrl+1` emoji 开关；`ctrl+2` 简繁开关；`ctrl+3` 中英互译开关
-- 翻页: `- =` / `[ ]` / `Control + hjkl` (vim 风格)
+- Opencc开关: `ctrl+1` emoji 开关；`ctrl+2` 简繁开关；`ctrl+3` 中英互译开关
+- 选词翻页: `- =` / `[ ]` / `Control + hjkl` (vim 风格)
+- 删除错误词频： `Shift+Del` 
 - 自定义词库在根目录新建 `custom_phrase.txt` 文件
 
 ```
@@ -72,7 +77,7 @@
 榆井希实	yujkxiui
 ```
 
-## File Description
+## 文件说明
 
 - flypy: 小鹤双拼+形码辅助
 - emoji: ae 输入 emoji

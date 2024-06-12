@@ -39,6 +39,7 @@ import_tables:
   - cn_dicts_cell/luna_pinyin.cn_en       # 中英
   # - cn_dicts_cell/luna_pinyin.history   # 历史
 
+  # 细胞词库 https://github.com/thunlp/THUOCL
   # - cn_dicts_cell/thuocl_animal
   - cn_dicts_cell/thuocl_caijing          
   - cn_dicts_cell/thuocl_food
