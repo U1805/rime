@@ -48,34 +48,34 @@ function M.func(input, seg, env)
         local cand = Candidate("UUID", seg.start, seg._end, guid(), " -V4")
         cand.quality = 100
         yield(cand)
-    -- 保存自定义词
-    else
-        local inpu = string.gsub(input,"[/]+$","")
-        if (string.len(inpu) > 1 and string.sub(input,1,1) ~= "/") then
-            if ( string.sub(input,-2)  == "//") then
-                local context = env.engine.context
-                local history_str = context.commit_history:latest_text()
+    -- -- 保存自定义词
+    -- else
+    --     local inpu = string.gsub(input,"[/]+$","")
+    --     if (string.len(inpu) > 1 and string.sub(input,1,1) ~= "/") then
+    --         if ( string.sub(input,-2)  == "//") then
+    --             local context = env.engine.context
+    --             local history_str = context.commit_history:latest_text()
                 
-                if history_str ~= "" then
-                    ppath = getCurrentDir() .. "custom_phrase.txt"
-                    local file = io.open(ppath,"a")
-                    file:write("\n" .. history_str .. "\t" .. inpu)
-                    file:close()
+    --             if history_str ~= "" then
+    --                 ppath = getCurrentDir() .. "custom_phrase.txt"
+    --                 local file = io.open(ppath,"a")
+    --                 file:write("\n" .. history_str .. "\t" .. inpu)
+    --                 file:close()
 
-                    local tip = string.format("已保存[%s %s]", history_str, inpu)
-                    yield(Candidate("pin", seg.start, seg._end, inpu , tip))
+    --                 local tip = string.format("已保存[%s %s]", history_str, inpu)
+    --                 yield(Candidate("pin", seg.start, seg._end, inpu , tip))
 
-                    -- todo 获取deployer路径进行隐式自动部署
-                    -- local script = "WeaselDeployer.exe /deploy"
-                    -- os.execute(script)
-                end
-            elseif ( string.sub(input, -1)  == "/") then
-                local context = env.engine.context
-                local history_str = context.commit_history:latest_text()
-                local tip = string.format("/保存[%s %s]", history_str, inpu)
-                yield(Candidate("pin", seg.start, seg._end, inpu , tip))
-            end
-        end
+    --                 -- todo 获取deployer路径进行隐式自动部署
+    --                 -- local script = "WeaselDeployer.exe /deploy"
+    --                 -- os.execute(script)
+    --             end
+    --         elseif ( string.sub(input, -1)  == "/") then
+    --             local context = env.engine.context
+    --             local history_str = context.commit_history:latest_text()
+    --             local tip = string.format("/保存[%s %s]", history_str, inpu)
+    --             yield(Candidate("pin", seg.start, seg._end, inpu , tip))
+    --         end
+    --     end
     end
 end
 
