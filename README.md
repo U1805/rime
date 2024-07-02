@@ -23,6 +23,7 @@
 - 日期时间相关：`date` `time` `week` `datetime` `timestamp` `anl` `month`
 - 生成 UUID：`uuid`
 - 符号输入 `/` 开头，`/help` 查看帮助，另支持[常用 Latex 符号](https://github.com/wklchris/Rime-latex-symbols) 
+- 优化英文输入体验，取自[雾凇拼音](https://dvel.me/posts/make-rime-en-better/)
 - 好看的皮肤 [win11_preset](https://github.com/LufsX/rime)
 
 ## 按键绑定
@@ -30,7 +31,8 @@
 - 方案选单：`Control+Shift+space` （原始的 Control+grave 与 vscode 打开终端冲突）
 - Opencc开关: `ctrl+1` emoji 开关；`ctrl+2` 简繁开关；`ctrl+3` 中英互译开关
 - 选词翻页: `- =` / `[ ]` / `Control + hjkl` (vim 风格)
-- 删除错误词频： `Shift+Del` 
+- `Shift + Del` 可以删除错误词频 
+- `Shift + ⌫` 可以删除单个汉字的拼音
 - 自定义词库在根目录新建 `custom_phrase.txt` 文件
 
 ```
