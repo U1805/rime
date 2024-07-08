@@ -1,0 +1,178 @@
+# Rime table
+# coding: utf-8
+#
+# 请将该文件以UTF-8编码保存为
+# Rime用户文件夹/custom_phrase.txt
+#
+# 码表各字段以制表符（Tab）分隔
+# 顺序为：文字、编码、权重（决定重码的次序、可选）
+#
+# 虽然文本码表编辑较为方便，但不适合导入大量条目
+
+
+X光	Xgl
+X光片	Xglpm
+X射线	Xuexm
+T恤	Txu
+T恤衫	Txuuj
+U盘	Upj
+B站	Bvj
+P站	Pvj
+Q币	Qbi
+QQ号	QQhc
+QQ号码	QQhcma
+QQ空间	QQksjm
+QQ群	QQqy
+QQ邮箱	QQyzxl
+QQ音乐	QQybyt
+QQ会员	QQhvyr
+QQ好友	QQhcyz
+QQ输入法	QQuurufa
+# 阿Q精神	aaQjkuf
+G胖	Gph
+Up主	Upvu
+P社	Pue
+V社	Vue
+Go语言	Goyuyj
+维生素A	wwugsuA
+维生素B	wwugsuB
+维生素C	wwugsuC
+维生素D	wwugsuD
+维生素E	wwugsuE
+维生素K	wwugsuK
+哆啦A梦	dolaAmg
+卡拉OK	kalaOK
+三K党	sjKdh
+C语言	Cyuyj
+S形	Sxk
+U形	Uxk
+X战警	Xvjjk
+YY语音	YYyuyb
+平A	pkA
+C罗	Clo
+P图	Ptu
+P个图	Pgetu
+P一下	Pyixx
+关底BOSS	grdiBOSS
+Q弹	Qtj
+X教授	Xjnuz
+Papi酱	Papijl
+V领	Vlk
+V字领	Vzilk
+V字形	Vzixk
+
+
+中州韵输入法引擎	rime	2
+https://rime.im/	rime	1
+Rime	rime	3
+⌘	cmd
+⌘	command
+⌃	ctrl
+⌃	control
+⌥	opt
+⌥	option
+⇧	shift
+⇪	cap
+⇪	caps
+⏎	return
+⏎	space
+⌫	backspace
+⌦	del
+⎋	escape
+
+Android	android
+Apple	apple
+Apple ID	appleid
+Clash	clash
+Cloudflare	cloudflare
+Cloudflare Workers	cloudflareworkers
+CSS	css
+Dropbox	dropbox
+GBK	gbk
+GitHub	github
+Google	google
+Linux linux
+HTML	html
+iCloud	icloud
+iMac	imac
+iOS	ios
+iPad	ipad
+iPad	ipad
+iPhone	iphone
+iPhone Xʀ	iphonexr
+iPod	ipod
+IPTV	iptv
+IPv4	ipv
+IPv6	ipv
+iTunes	itunes
+Java	java
+JavaScript	javascript
+jQuery	jquery
+Linux	linux
+Mac	mac
+Mac App Store	mas
+MacBook	macbook
+MacBook Air	mba
+MacBook Pro	mbp
+macOS	macos	7
+macOS Sonoma	macos	6
+macOS Ventura	macos	5
+macOS Monterey	macos	4
+macOS Catalina	macos	3
+macOS Mojave	macos	2
+macOS High Sierra	macos	1
+Magisk	magisk
+Minecraft	minecraft
+MySQL	mysql
+Objective-C	ojbc
+OneDrive	onedrive
+OS X	osx
+Pixel	pixel
+Python	python
+QQ 邮箱	qqyzxl
+Quantumult	quantumult
+Ruby	ruby
+Rust	rust
+SQL	sql
+Stash	stash
+Surge	surge
+Swift	swift
+Tailscale	tailscale
+TypeScript	typescript
+T恤	txu
+UTF-8	utfba
+U盘	upj
+WeChat	wechat
+Wi-Fi	wifi
+Windows	win
+Windows	windows
+X-Ray	xray
+Xbox	xbox
+Xbox One	xboxone
+YouTube	youtube
+ZeroTier	zerotier
+
+又双叒叕	yzyzyz
+榆井希实	yujkxiui
+莊	vlcu
+咲	xnkg
+咲	xnk
+澪	lkd
+唯	wwk
+瑠	lqw
+丨	gy
+
+😋	tuue
+😋	hcii
+😋	tnpi
+😅	gjga
+😅	lqhj
+😭	daku
+🤣	daxn
+😇	tmui
+🥰	kdxb
+🤡	xniz
+🤌	nanp
+😎	mojk
+😤	aomj
+✅	check

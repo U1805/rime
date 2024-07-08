@@ -40,13 +40,16 @@ import_tables:
   # - cn_dicts_cell/luna_pinyin.history   # 历史
 
   # 细胞词库 https://github.com/thunlp/THUOCL
-  # - cn_dicts_cell/thuocl_animal
-  - cn_dicts_cell/thuocl_caijing          
-  - cn_dicts_cell/thuocl_food
-  - cn_dicts_cell/thuocl_idiom
-  - cn_dicts_cell/thuocl_IT
-  # - cn_dicts_cell/thuocl_medical
-  - cn_dicts_cell/thuocl_renmingdiming
+  # - cn_dicts_cell/thuocl_animal.flypy
+  - cn_dicts_cell/thuocl_caijing.flypy
+  - cn_dicts_cell/thuocl_food.flypy
+  - cn_dicts_cell/thuocl_idiom.flypy
+  - cn_dicts_cell/thuocl_IT.flypy
+  # - cn_dicts_cell/thuocl_medical.flypy
+  - cn_dicts_cell/thuocl_renmingdiming.flypy
+
+  # 维基词库 https://github.com/felixonmars/fcitx5-pinyin-zhwiki、https://github.com/outloudvi/mw2fcitx
+  - cn_dicts_cell/moegirl.flypy
 ...
 
 # 按需启用：

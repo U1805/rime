@@ -39,6 +39,7 @@ style:
   # __include: "weasel:/win10_preset"
 
   color_scheme: apathy # 颜色方案
+  color_scheme_dark: macos12_dark
 
 preset_color_schemes:
   ayaya:
