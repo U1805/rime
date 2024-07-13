@@ -8,7 +8,7 @@
 
 ## 特性
 
-- 打词时插入鹤形作辅助码 ✎ eg. 寄宿 `jisub` 极速 `jimsu`; 可以用 `Tab` 引导辅助码
+- 打词时插入鹤形作辅助码 ✎ eg. 寄宿 `jisub` 极速 `jimsu`
 - `ab` 开头笔画输入（反查） ✎ eg. 木 `abhspn`
 - `az` 开头[组字](https://github.com/mirtlecn/rime-radical-pinyin)输入（反查） ✎ eg. 晶 `azririri`
 - `ae` 开头 emoji 输入，`E` 开头输入 emoji 总类 ✎ eg. 🐧 `aeqiee` 🐱 `Edswu`; `ctrl+1` emoji 开关
@@ -20,7 +20,7 @@
 - U开头Unicode输入 ✎ eg. ⿻ `U2ffb`
 - V开头[计算器模式 ](https://github.com/gaboolic/rime-shuangpin-fuzhuma/blob/main/md/calc.md) ✎ eg. 1+1=2 `V1+1`，`Vrandom()`
 - o开头快速输入各种符号偏旁部件 [小鹤 · 符号](https://flypy.cc/#/fh)
-- 日期时间相关：`date` `time` `week` `datetime` `timestamp` `anl` `month`
+- 日期时间相关：`date` `time` `week` `datetime` `timestamp` `lunar` `month`
 - 生成 UUID：`uuid`
 - 符号输入 `/` 开头，`/help` 查看帮助，另支持[常用 Latex 符号](https://github.com/wklchris/Rime-latex-symbols) 
 - 优化英文输入体验，取自[雾凇拼音](https://dvel.me/posts/make-rime-en-better/)
@@ -29,6 +29,7 @@
 ## 按键绑定
 
 - 方案选单：`Control+Shift+space` （原始的 Control+grave 与 vscode 打开终端冲突）
+- `;` 引导辅助码，`'` 分隔拼音，``` ` ``` 万能键
 - Opencc开关: `ctrl+1` emoji 开关；`ctrl+2` 简繁开关；`ctrl+3` 中英互译开关
 - 选词翻页: `- =` / `[ ]` / `Control + hjkl` (vim 风格)
 - `Shift + Del` 可以删除错误词频 
