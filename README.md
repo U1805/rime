@@ -25,6 +25,7 @@
 - 符号输入 `/` 开头，`/help` 查看帮助，另支持[常用 Latex 符号](https://github.com/wklchris/Rime-latex-symbols) 
 - 优化英文输入体验，取自[雾凇拼音](https://dvel.me/posts/make-rime-en-better/)
 - 好看的皮肤 [win11_preset](https://github.com/LufsX/rime)
+- 部分小鹤直通车[功能实现](https://github.com/kchen0x/rime-crane)，见 [shortcut](./lua/xhup/shortcut_translator.lua)
 
 ## 按键绑定
 

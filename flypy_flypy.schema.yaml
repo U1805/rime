@@ -42,6 +42,7 @@ switches:
 
 engine:
   processors:
+    - lua_processor@*xhup/shortcut_processor
     - ascii_composer
     - recognizer
     - key_binder
@@ -80,6 +81,7 @@ engine:
     - lua_translator@unicode            # Unicode
     - lua_translator@number_translator  # 数字、金额大写
     - lua_translator@calc_translator    # 计算器
+    - lua_translator@*xhup/shortcut_translator  # Lua 直通车
   filters:
     - lua_filter@long_word_filter       # 长词优先（顺序要求：长词优先 > Emoji）
     - lua_filter@autocap_filter         # 英文自动大写
