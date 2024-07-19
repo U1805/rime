@@ -26,6 +26,7 @@
 - 优化英文输入体验，取自[雾凇拼音](https://dvel.me/posts/make-rime-en-better/)
 - 好看的皮肤 [win11_preset](https://github.com/LufsX/rime)
 - 部分小鹤直通车[功能实现](https://github.com/kchen0x/rime-crane)，见 [shortcut](./lua/xhup/shortcut_translator.lua)
+- 超级简拼：1码、2码、3码时，按下 Tab 自动上屏1字、2字词、3字词，不和空格上屏的单字冲突
 
 ## 按键绑定
 
@@ -54,7 +55,8 @@
 
 ## 文件说明
 
-- flypy: 小鹤双拼+形码辅助
+- flypy_flypy: 小鹤双拼+鹤形辅助
+- flypy_moqi: 小鹤双拼+墨奇辅助
 - emoji: ae 输入 emoji
 - japanese: aj 输入日语 (japanese)
 - melt_eng: aw 输入英语 (word)
