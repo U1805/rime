@@ -64,7 +64,7 @@ speller:
     - 'derive/fu/hu/'
 
 key_binder:
-  import_preset: default
+  # import_preset: default
   bindings:
     - { when: has_menu, accept: bracketleft, send: Page_Up }      # [] 翻页
     - { when: has_menu, accept: bracketright, send: Page_Down }

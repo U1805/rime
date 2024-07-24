@@ -46,7 +46,7 @@ key_binder:
     # - { when: has_menu, accept: Shift+Tab, send: Up }
     # - { when: has_menu, accept: Tab, send: Down }
     # 翻页 [ ]
-    - { when: paging, accept: bracketleft, send: Page_Up }
+    - { when: has_menu, accept: bracketleft, send: Page_Up }
     - { when: has_menu, accept: bracketright, send: Page_Down }
 
     # 将小键盘 0~9 . + - * / 映射到主键盘

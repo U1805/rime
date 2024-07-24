@@ -5,7 +5,7 @@
 schema:
   schema_id: flypy_moqi
   name: 小鹤双拼(墨奇码)
-  version: "2024-07-02"
+  version: "2024-07-24"
   author:
     - Functoreality
     - Dvel
@@ -68,7 +68,7 @@ engine:
     - table_translator@melt_eng_in_cn
     - table_translator@custom_phrase
     - table_translator@custom_phrase_kf
-    - table_translator@custom_phrase_xhzg
+    - table_translator@custom_phrase_mqzg
     - table_translator@custom_phrase_super_1jian
     - table_translator@custom_phrase_super_2jian
     - table_translator@custom_phrase_super_3jian
@@ -81,22 +81,25 @@ engine:
     - script_translator@emojis           # 添加注释后：停用ae模式emoji输入
     - script_translator@melt_eng         # 添加注释后：停用单词输入
     - script_translator@japanese         # 添加注释后：停用日语输入
-    - lua_translator@melt
-    - lua_translator@date_translator    # 时间、日期、星期
-    - lua_translator@lunar              # 农历
-    - lua_translator@unicode            # Unicode
-    - lua_translator@number_translator  # 数字、金额大写
-    - lua_translator@calc_translator    # 计算器
+    - lua_translator@*melt
+    - lua_translator@*date_translator    # 时间、日期、星期
+    - lua_translator@*lunar              # 农历
+    - lua_translator@*unicode            # Unicode
+    - lua_translator@*number_translator  # 数字、金额大写
+    - lua_translator@*calculator         # 计算器
     - lua_translator@*xhup/shortcut_translator  # Lua 直通车
   filters:
-    - lua_filter@long_word_filter       # 长词优先（顺序要求：长词优先 > Emoji）
-    - lua_filter@autocap_filter         # 英文自动大写
-    - simplifier@emoji                  # Emoji
-    - lua_filter@reduce_emoji_filter    # 按需启用，作用是降低Emoji在候选项中的位置排序(顺序要求：Emoji > 降低排序)
-    - simplifier@chinese_english
-    - simplifier@traditionalize         # 简繁切换
-    - simplifier@mars                   # 火星文
-    - simplifier@others                 # 月份星期/符号/部首/人名/生僻字...
+    - lua_filter@*laneChangeAndSpace_Filter  # 把<br>替换为换行
+    - lua_filter@*is_in_user_dict            # 用户词典的词加上一个*
+    - lua_filter@*stick                      # tab置顶词回显在第一个comment中
+    - lua_filter@*long_word_filter           # 长词优先（顺序要求：长词优先 > Emoji）
+    - lua_filter@*autocap_filter             # 英文自动大写
+    - simplifier@emoji                       # Emoji
+    - lua_filter@*reduce_emoji_filter        # 按需启用，作用是降低Emoji在候选项中的位置排序(顺序要求：Emoji > 降低排序)
+    - simplifier@chinese_english             # 中英词典
+    - simplifier@traditionalize              # 简繁切换
+    - simplifier@mars                        # 火星文
+    - simplifier@others                      # 月份星期/符号/部首/人名/生僻字...
     - uniquifier
 
 # 计算器触发关键字
@@ -132,11 +135,14 @@ speller:
   # 第一位<空格>是拼音之间的分隔符；第二位<'>表示可以手动输入单引号来分割拼音。
   delimiter: " '"
   algebra:
+    # 日语长音促音规则
+    - 'derive/_/x/'
+    - 'derive/-/q/'
   
     - derive/^(\w\w);(\w)(\w)$/$1$2`/  # ABC`
     - derive/^(\w\w);(\w)(\w)$/$1`$3/  # AB`D
     - derive/^(\w\w);(\w)(\w)$/$1``/   # AB``
-    - derive/^(\w\w);(\w)(\w)$/``$2$3/  # ``CD
+    # - derive/^(\w\w);(\w)(\w)$/``$2$3/  # ``CD
     
     # 模糊音 可选择性开启
     # - derive/^z([a-z])/v$1/
@@ -152,7 +158,7 @@ speller:
     - derive/[;]//
 
 translator:
-  dictionary: flypy_flypy
+  dictionary: flypy_moqi
   enable_completion: false
   ##  默认为不超过 2 个字的候选项显示输入码；将 2 改为 0 可关闭编码提示，
   ##  改为 1 则是只显示单字的输入码，依此类推。
@@ -329,32 +335,13 @@ custom_phrase_kf:
   initial_quality: -1 #本表词和系统词重码居后
 
 # 墨奇字根
-custom_phrase_xhzg:
+custom_phrase_mqzg:
   dictionary: ""
   user_dict: custom_phrase/custom_phrase_mqzg
   db_class: stabledb
   enable_sentence: false
   enable_completion: false
   initial_quality: -1 #本表词和系统词重码居后
-
-# # 无冲突的3简
-# custom_phrase_super_3jian_no_conflict:
-#   dictionary: ""
-#   user_dict: custom_phrase/custom_phrase_super_3jian_no_conflict
-#   db_class: stabledb
-#   enable_sentence: false
-#   enable_completion: false
-#   initial_quality: -2 #本表词和系统词重码居后
-
-# # 无冲突的4简（有点影响我打单字了）
-# custom_phrase_super_4jian_no_conflict:
-#   dictionary: ""
-#   user_dict: custom_phrase/custom_phrase_super_4jian_no_conflict
-#   db_class: stabledb
-#   enable_sentence: false
-#   enable_completion: false
-#   initial_quality: -2 #本表词和系统词重码居后
-#   # initial_quality: 1 #比系统词靠后，比无词靠前  等后面4jian_no_conflict只留下成语和常用词，再改为1
 
 # 超强tab 1码
 custom_phrase_super_1jian:

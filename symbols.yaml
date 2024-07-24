@@ -118,7 +118,7 @@ punctuator:
     "/q": &q []
     "/r": &r ["/rq 日期"]
     "/s": &s ["/svm 苏州码"]
-    "/t": &t ["/tj 推荐", "/tg 天干", "/tt 天体", "/tq 天气", "/txj 太玄经"]
+    "/t": &t ["/table MD表格", "/tj 推荐", "/tg 天干", "/tt 天体", "/tq 天气", "/txj 太玄经"]
     "/u": &u ["/ub 上标", "/ud 声调", "/ueg 十二宫", "/uj 时间", "/um 书名号", "/ux 数学", "/uz[q|h|d] 数字+[圈|弧|点]", "/uz 色子"]
     "/v": &v ["/vt 状态", "/vy 注音"]
     "/w": &w []
@@ -143,6 +143,7 @@ punctuator:
 
     # 推荐
     "/tj": ["★☆☆☆☆", "★★☆☆☆", "★★★☆☆", "★★★★☆", "★★★★★",  "☆☆☆☆☆"]
+    "/table": ["| Syntax      | Description | Test Text     |<br>| :---        |    :----:   |          ---: |<br>| Header      | Title       | Here's this   |<br>| Paragraph   | Text        | And more      |"]
     # 状态
     "/vt": ["➖", "✅", "❌", "❓"]
     # 符号、电脑

@@ -1,4 +1,6 @@
 ## 超强3简 使用deal_super_3jian.py生成
+## ymy 也没有 -> 有没有
+
 啊啊啊	aaa/
 暗暗地	aad/
 挨挨儿	aae/
@@ -13392,7 +13394,7 @@ X光	xgl/
 一秒钟	ymv/
 一米五	ymw/
 亚马逊	ymx/
-也没有	ymy/
+有没有	ymy/
 以满足	ymz/
 一年半	ynb/
 野牛草	ync/

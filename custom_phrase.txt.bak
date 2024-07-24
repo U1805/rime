@@ -9,6 +9,14 @@
 #
 # 虽然文本码表编辑较为方便，但不适合导入大量条目
 
+## 常用个人信息
+## 注意最后的数字控制优先级，希望排在前面的要设置得大一些
+姓名（在custom_phrase.txt里设置）	info	64
+xxx（学号/工号）	info	60
+12300001234（手机）	info	56
+xx学院/部门	info	48
+xx學校/單位	info	44
+foo@xx.com（邮箱）	info	40
 
 X光	Xgl
 X光片	Xglpm
