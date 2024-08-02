@@ -147,10 +147,14 @@ speller:
     # - derive/^v([a-z])/z$1/
     # - derive/^i([a-z])/c$1/
     # - derive/^u([a-z])/s$1/
+    - derive/^ud/uk/ # shuai <-> shai
+    - derive/^uk/ud/
+    - derive/^vv/vy/ # zhui <-> zhun
+    - derive/^vy/vv/
 
+    # 辅助码
     - derive/^(..)[;].+$/$1/
     - derive/^(..[;].).+$/$1/
-    # - derive/^([jqxy])u/$1v/
     - derive/[;]//
 
 translator:

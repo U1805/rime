@@ -33,6 +33,7 @@ switches:
 engine:
   processors:
     - ascii_composer
+    - chord_composer
     - recognizer
     - key_binder
     - speller
@@ -60,8 +61,16 @@ speller:
     - 'derive/_/x/'
     - 'derive/-/q/'
     # Add / remove rules the as you wish
-    - 'derive/i_e/ye/'
+    # - 'derive/i_e/ye/'
     - 'derive/fu/hu/'
+
+chord_composer:
+  alphabet: 'zyxwvutsrqponmlkjihgfedcba-_'
+  algebra:
+    # 中文输入"习惯"
+    - xform/yi/i/
+    - xform/ye/e/
+    - xform/wu/u/
 
 key_binder:
   # import_preset: default
