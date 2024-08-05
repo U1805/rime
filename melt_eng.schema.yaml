@@ -56,13 +56,13 @@ speller:
 translator:
   dictionary: melt_eng
   spelling_hints: 9
-
-# key_binder:
-#   import_preset: default
-#   bindings: 
-#     - { when: always, accept: Control+minus, select: dai0v0_japanese } 
-#     - { when: always, accept: Control+equal, select: dai0v0_flypy }
   
+# 按键绑定
+key_binder:
+  import_preset: default
+  bindings:    
+    - { when: always, accept: Shift+Shift_R, select: flypy_flypy }
+
 punctuator:
   import_preset: default
 

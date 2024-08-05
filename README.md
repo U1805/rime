@@ -31,6 +31,7 @@
 ## 按键绑定
 
 - 方案选单：`Control+Shift+space` （原始的 Control+grave 与 vscode 打开终端冲突）
+- 方案切换：`右 Shift` 切中日英
 - `;` 引导辅助码，`'` 分隔拼音，``` ` ``` 万能键
 - Opencc开关: `ctrl+1` emoji 开关；`ctrl+2` 简繁开关；`ctrl+3` 中英互译开关
 - 选词翻页: `- =` / `[ ]` / `Control + hjkl` (vim 风格)
@@ -56,7 +57,6 @@
 ## 文件说明
 
 - flypy_flypy: 小鹤双拼+鹤形辅助
-- flypy_moqi: 小鹤双拼+墨奇辅助
 - emoji: ae 输入 emoji
 - japanese: aj 输入日语 (japanese)
 - melt_eng: aw 输入英语 (word)
