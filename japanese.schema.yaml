@@ -77,7 +77,7 @@ key_binder:
   bindings:
     - { when: has_menu, accept: bracketleft, send: Page_Up }      # [] 翻页
     - { when: has_menu, accept: bracketright, send: Page_Down }
-    - { when: always, accept: Shift+Shift_R, select: melt_eng }
+    # - { when: always, accept: Shift+Shift_R, select: melt_eng }
 
 translator:
   dictionary: japanese

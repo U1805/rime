@@ -252,8 +252,8 @@ key_binder:
     - { when: always, accept: Control+3, toggle: chinese_english }    # 中英互译
     # - { when: has_menu, accept: semicolon, send: 2 }
     # - { when: has_menu, accept: slash, send: 3 }
-    - { match: "[a-z]{1,3}", accept: Tab,  send_sequence: "/1" }      # 简拼
-    - { when: always, accept: Shift+Shift_R, select: japanese }       # 右shift切中日英
+    - { match: "[a-z]{1,4}", accept: Tab,  send_sequence: "/1" }      # 简拼
+    # - { when: always, accept: Shift+Shift_R, select: japanese }       # 右shift切中日英
 
 recognizer:
   # import_preset: default
