@@ -5,7 +5,7 @@
 schema:
   schema_id: flypy_flypy
   name: 小鹤双拼
-  version: "2024-07-24"
+  version: "2024-11-23"
   author:
     - Functoreality
     - Dvel
@@ -42,8 +42,9 @@ switches:
 
 engine:
   processors:
-    - lua_processor@*key_binder # 绑定按键match
-    - lua_processor@*xhup/shortcut_processor
+    - lua_processor@*moqi/key_binder          # 绑定按键match
+    - lua_processor@*crane/shortcut_processor # 小鹤直通车
+    - lua_processor@*cloud/baidu_processor    # 云输入
     - ascii_composer
     - recognizer
     - key_binder
@@ -82,46 +83,25 @@ engine:
     - script_translator@melt_eng         # 添加注释后：停用单词输入
     - script_translator@japanese         # 添加注释后：停用日语输入
     - lua_translator@*melt
-    - lua_translator@*date_translator    # 时间、日期、星期
-    - lua_translator@*lunar              # 农历
-    - lua_translator@*unicode            # Unicode
-    - lua_translator@*number_translator  # 数字、金额大写
-    - lua_translator@*calculator         # 计算器
-    - lua_translator@*xhup/shortcut_translator  # Lua 直通车
+    - lua_translator@*ice/date_translator    # 时间、日期、星期
+    - lua_translator@*ice/lunar              # 农历
+    - lua_translator@*ice/unicode            # Unicode
+    - lua_translator@*ice/number_translator  # 数字、金额大写
+    - lua_translator@*moqi/calculator        # 计算器
+    - lua_translator@*crane/shortcut_translator  # 小鹤直通车
+    - lua_translator@*cloud/baidu_translator # 云输入
   filters:
-    - lua_filter@*laneChangeAndSpace_Filter  # 把<br>替换为换行
-    - lua_filter@*is_in_user_dict            # 用户词典的词加上一个*
-    - lua_filter@*stick                      # tab置顶词回显在第一个comment中
-    - lua_filter@*long_word_filter           # 长词优先（顺序要求：长词优先 > Emoji）
-    - lua_filter@*autocap_filter             # 英文自动大写
+    - lua_filter@*ice/is_in_user_dict        # 用户词典的词加上一个*
+    - lua_filter@*ice/long_word_filter       # 长词优先（顺序要求：长词优先 > Emoji）
+    - lua_filter@*ice/autocap_filter         # 英文自动大写
+    - lua_filter@*moqi/stick                 # tab置顶词回显在第一个comment中
+    - lua_filter@*moqi/reduce_emoji_filter   # 按需启用，作用是降低Emoji在候选项中的位置排序(顺序要求：Emoji > 降低排序)
     - simplifier@emoji                       # Emoji
-    - lua_filter@*reduce_emoji_filter        # 按需启用，作用是降低Emoji在候选项中的位置排序(顺序要求：Emoji > 降低排序)
     - simplifier@chinese_english             # 中英词典
     - simplifier@traditionalize              # 简繁切换
     - simplifier@mars                        # 火星文
     - simplifier@others                      # 月份星期/符号/部首/人名/生僻字...
     - uniquifier
-
-# Lua 配置: 日期、时间、星期、ISO 8601、时间戳的触发关键字
-date_translator:
-  date: date            # 日期： 2022-11-29
-  time: time            # 时间： 18:13
-  week: week            # 星期： 星期二
-  datetime: datetime    # ISO 8601： 2022-11-29T18:13:11+08:00
-  timestamp: timestamp  # 时间戳： 1669716794
-  month: month          # 月份： June/Jun
-
-melt:
-  uuid: uuid
-
-# Lua 配置：农历的触发关键字
-lunar: lunar  # 农历： 二〇二三年冬月二十 癸卯年（兔）冬月二十
-# Lua 配置：长词优先
-# 提升 count 个词语，插入到第 idx 个位置。
-# 示例：将 2 个词插入到第 1  个候选项，输入 总算 得到「1总算 2纵」
-long_word_filter:
-  count: 2
-  idx: 1
 
 speller:
   # 如果不想让什么标点直接上屏，可以加在 alphabet，或者编辑标点符号为两个及以上的映射
@@ -269,9 +249,9 @@ recognizer:
     pinyin: "^ap[a-z]*'?$"
     ## 功能
     calculator: "^V.*$"                 # 计算器需要用
-    unicode: "^U[a-f0-9]+"              # 脚本将自动获取第 2 个字符 U 作为触发前缀，响应 lua_translator@unicode，输出 Unicode 字符
-    number: "^R[0-9]+[.]?[0-9]*"        # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@number_translator，数字金额大写
-    gregorian_to_lunar: "^N[0-9]{1,8}"  # 脚本将自动获取第 2 个字符 N 作为触发前缀，响应 lua_translator@lunar，公历转农历，输入 N20240115 得到「二〇二三年腊月初五」
+    unicode: "^U[a-f0-9]+"              # 响应 lua_translator@unicode，输出 Unicode 字符
+    number: "^R[0-9]+[.]?[0-9]*"        # 响应 lua_translator@number_translator，数字金额大写
+    gregorian_to_lunar: "^N[0-9]{1,8}"  # 响应 lua_translator@lunar，公历转农历，输入 N20240115 得到「二〇二三年腊月初五」
 
 ################################## 功能词典 #############################
 emojis:
@@ -320,7 +300,7 @@ pinyin:
 # 小鹤简码
 custom_phrase:
   dictionary: ""
-  user_dict: custom_phrase/custom_phrase
+  user_dict: cn_dicts_xh/custom_phrase/custom_phrase
   db_class: stabledb
   enable_completion: false
   enable_sentence: false
@@ -329,7 +309,7 @@ custom_phrase:
 # 小鹤快符
 custom_phrase_kf:
   dictionary: ""
-  user_dict: custom_phrase/custom_phrase_kf
+  user_dict: cn_dicts_xh/custom_phrase/custom_phrase_kf
   db_class: stabledb
   enable_sentence: false
   enable_completion: false
@@ -338,7 +318,7 @@ custom_phrase_kf:
 # 小鹤字根
 custom_phrase_xhzg:
   dictionary: ""
-  user_dict: custom_phrase/custom_phrase_xhzg
+  user_dict: cn_dicts_xh/custom_phrase/custom_phrase_xhzg
   db_class: stabledb
   enable_sentence: false
   enable_completion: false
@@ -347,7 +327,7 @@ custom_phrase_xhzg:
 # 超强tab 1码
 custom_phrase_super_1jian:
   dictionary: ""
-  user_dict: custom_phrase/custom_phrase_super_1jian
+  user_dict: cn_dicts_xh/custom_phrase/custom_phrase_super_1jian
   db_class: stabledb
   enable_sentence: false
   enable_completion: false
@@ -356,7 +336,7 @@ custom_phrase_super_1jian:
 # 超强tab 2码
 custom_phrase_super_2jian:
   dictionary: ""
-  user_dict: custom_phrase/custom_phrase_super_2jian
+  user_dict: cn_dicts_xh/custom_phrase/custom_phrase_super_2jian
   db_class: stabledb
   enable_sentence: false
   enable_completion: false
@@ -365,7 +345,7 @@ custom_phrase_super_2jian:
 # 超强tab 3码
 custom_phrase_super_3jian:
   dictionary: ""
-  user_dict: custom_phrase/custom_phrase_super_3jian
+  user_dict: cn_dicts_xh/custom_phrase/custom_phrase_super_3jian
   db_class: stabledb
   enable_sentence: false
   enable_completion: false

@@ -37,9 +37,10 @@ end
 local M = {}
 
 function M.init(env)
-    local config = env.engine.schema.config
-    env.name_space = env.name_space:gsub('^*', '')
-    M.uuid = config:get_string(env.name_space .. '/uuid') or 'guid'
+    -- local config = env.engine.schema.config
+    -- env.name_space = env.name_space:gsub('^*', '')
+    -- M.uuid = config:get_string(env.name_space .. '/uuid') or 'guid'
+    M.uuid = "uuid"
 end
 
 function M.func(input, seg, env)

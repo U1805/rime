@@ -125,7 +125,12 @@ punctuator:
     "/x": &x ["/xb 下标", "/xh 星号", "/xl(d) 希腊字母", "/xq 象棋", "/xx 星星", "/xz(m) 星座名"]
     "/y": &y ["/yf 月份", "/yr 曜日", "/yy 音乐"]
     "/z": &z ["/zm[q|h] 字母+[圈|弧]"]
-    
+
+    '/latex': ["\\begin{figure}[ht]\r    \\centering\r    \\includegraphics[width = 1\\textwidth]{image.png}\r    \\bicaption[fig:tag]{}{标题。}{Fig.$\\!$}{title.}\r\\end{figure}", 
+               "\\begin{table}[h]\r    \\bicaption[tab:tag]{}{标题。}{Table$\\!$}{Title.}\r    \\vspace{0.5em}\\centering\\wuhao\r    \\begin{tabular}{c c}\r        \\toprule[1.5pt]\r        & \\\\\r        \\midrule[1pt]\r        & \\\\\r        \\bottomrule[1.5pt]\r    \\end{tabular}\r\\end{table}",
+               "\\begin{algorithm}[htbp]\r	\\AlgoBiCaption{标题}{Title}\r	\\label{alg:tag}\r	\\KwIn{输入$s$;}\r	\\KwOut{输出$s$;}\r	\\For(){i $\\leftarrow$ 1 to len(s.fix)}{\r        \\If(){s.fix[i] $\\leftarrow$ 1}{\r\r            \\tcp{注释}\r\r            $extendlist \\leftarrow expand(index[i], ER);$ \\tcp*{注释}\r\r            $extend the index[i] with range ER$;\r        }\r	}\r	\\Return $s$;\r\\end{algorithm}"
+    ]
+
     # x
     "/bq": [/bqa：angry, /bqb：bad, /bqh：happy, /bqsa：sad, /bqsh：shy, /bqw：wow]
     "/bqh": ["(*ﾟ∀ﾟ*)", "(శωశ)", "(*´∀`)~♥", "σ`∀´)σ", "(〃∀〃)", "(^_っ ^)", "(｡◕∀◕｡)", "ヽ (✿ﾟ▽ﾟ) ノ", "ε٩(๑> ₃ <)۶з", "(σ′▽‵)′▽‵)σ", "σ ﾟ∀ ﾟ) ﾟ∀ﾟ)σ", "｡:.ﾟヽ (*´∀`)ﾉﾟ.:｡", "(✪ω✪)", "(∂ω∂)", "─=≡Σ((( つ •̀ω•́) つ", "(๑´ڡ`๑)", "(´▽`ʃ♡ƪ)", "(❛◡❛✿)", "(灬 ºωº 灬)", "(￣▽￣)/", "╰(*°▽°*)╯   ", "(๑•̀ㅂ•́)و✧", "( ^ω^)", "٩(｡・ω・｡)و", "( ～'ω')～", "(๑ơ ₃ ơ)♥", "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧", "o(☆Ф∇Ф☆)o", "(￫ܫ￩)", "(♥д♥)", "✧◝(⁰▿⁰)◜✧", "(ᗒᗨᗕ)/", "(=´ω`=)", "(｢･ω･)｢", "(*´д`)", "Σ>―(〃°ω°〃)♡→", "(▰˘◡˘▰)", "ヾ (´ε` ヾ)", "(っ●ω●) っ", "◥(ฅº￦ºฅ)◤", "ヽ ( ° ▽°) ノ", "(　ﾟ∀ﾟ) ﾉ♡", "✧*｡٩(ˊᗜˋ*)و✧*｡", "⁽⁽◟(∗ ˊωˋ ∗)◞ ⁾⁾", "ヾ (´︶`*)ﾉ♬", "ヾ (*´∀ ˋ*)ﾉ", "(๑•̀ω•́) ノ", "ヾ (o ° ω ° O) ノ゙"]
@@ -143,7 +148,7 @@ punctuator:
 
     # 推荐
     "/tj": ["★☆☆☆☆", "★★☆☆☆", "★★★☆☆", "★★★★☆", "★★★★★",  "☆☆☆☆☆"]
-    "/table": ["| Syntax      | Description | Test Text     |<br>| :---        |    :----:   |          ---: |<br>| Header      | Title       | Here's this   |<br>| Paragraph   | Text        | And more      |"]
+    "/table": ["| Syntax      | Description | Test Text     |\r| :---        |    :----:   |          ---: |\r| Header      | Title       | Here's this   |\r| Paragraph   | Text        | And more      |"]
     # 状态
     "/vt": ["➖", "✅", "❌", "❓"]
     # 符号、电脑
