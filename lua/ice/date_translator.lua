@@ -10,20 +10,14 @@ end
 local M = {}
 
 function M.init(env)
-    -- local config = env.engine.schema.config
-    -- env.name_space = env.name_space:gsub('^*', '')
-    -- M.date = config:get_string(env.name_space .. '/date') or 'rq'
-    -- M.time = config:get_string(env.name_space .. '/time') or 'sj'
-    -- M.week = config:get_string(env.name_space .. '/week') or 'xq'
-    -- M.datetime = config:get_string(env.name_space .. '/datetime') or 'dt'
-    -- M.timestamp = config:get_string(env.name_space .. '/timestamp') or 'ts'
-    -- M.month = config:get_string(env.name_space .. '/month') or 'yf'
-    M.date = "date"           -- 日期： 2022-11-29
-    M.time = "time"           -- 时间： 18:13
-    M.week = "week"           -- 星期： 星期二
-    M.datetime = "datetime"   -- ISO 8601： 2022-11-29T18:13:11+08:00
-    M.timestamp = "timestamp" -- 时间戳： 1669716794
-    M.month = "month"         -- 月份： June/Jun
+    local config = env.engine.schema.config
+    env.name_space = env.name_space:gsub('^*', '')
+    M.date = config:get_string(env.name_space .. '/date') or 'date'                -- 日期： 2022-11-29
+    M.time = config:get_string(env.name_space .. '/time') or 'time'                -- 时间： 18:13
+    M.week = config:get_string(env.name_space .. '/week') or 'week'                -- 星期： 星期二
+    M.datetime = config:get_string(env.name_space .. '/datetime') or 'datetime'    -- ISO 8601： 2022-11-29T18:13:11+08:00
+    M.timestamp = config:get_string(env.name_space .. '/timestamp') or 'timestamp' -- 时间戳： 1669716794
+    M.month = config:get_string(env.name_space .. '/month') or 'month'             -- 月份： June/Jun
 end
 
 function M.func(input, seg, env)

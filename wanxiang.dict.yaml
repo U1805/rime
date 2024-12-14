@@ -1,0 +1,84 @@
+# Rime dictionary
+# encoding: utf-8
+# 
+# rime配置的部署位置：
+# ~/.local/share/fcitx5/rime 或者 ~/.config/ibus/rime  (Linux)
+# ~/Library/Rime  (Mac OS)
+# %APPDATA%\Rime  (Windows)
+# 
+#
+
+---
+name: wanxiang
+version: "2024.11.11"
+sort: by_weight  #字典初始排序，可選original或by_weight
+use_preset_vocabulary: false
+import_tables:
+  - cn_dicts/large    # 大字集
+  - cn_dicts/base     # 基础词库
+  - cn_dicts/ext      # 扩展词库
+  - cn_dicts/compatible   #很重要不能取消
+  - cn_dicts/corrections   # 一般性容错码，同时支持错音和错字编码正确提示供超级注释lua使用
+
+  - jm_dicts/chengyu  # 简拼四字成语
+
+  # 维基词库 https://github.com/felixonmars/fcitx5-pinyin-zhwiki、https://github.com/outloudvi/mw2fcitx
+  - cn_dicts/cell/moegirl.flypy
+  # 细胞词库 https://github.com/Bambooin/rimerc
+  - cn_dicts/cell/luna_pinyin.computer
+  # 细胞词库 https://github.com/thunlp/THUOCL
+...
+
+
+# 按需启用：
+
+# 大写字母
+# 可在拼音方案下直接输入大写字母（Shift + 字母），大写字母参与造句。
+# 示例：输入 `nihaoASDFzaijian` 得到 `你好ASDF再见`
+# （非雾凇方案的双拼如果要启用，需要参考双拼方案下的 speller/algebra 将大写字母搭桥改成一些特殊字符）
+A	A
+B	B
+C	C
+D	D
+E	E
+F	F
+G	G
+H	H
+I	I
+J	J
+K	K
+L	L
+M	M
+N	N
+O	O
+P	P
+Q	Q
+R	R
+S	S
+T	T
+U	U
+V	V
+W	W
+X	X
+Y	Y
+Z	Z
+
+# 数字参与中文造词，方便输入一些特殊的 ID。配合大写字母造词可以自动为 `5G网络`，`3D打印` 等词汇注音
+0	lk
+1	yi
+1	yc
+2	er
+3	sj
+4	si
+5	wu
+6	lq
+7	qi
+8	ba
+9	jq
+# 示例：输入 siSdian 得到 4S店
+3G
+4G
+5G
+3D
+4S
+3A

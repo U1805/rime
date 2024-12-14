@@ -60,4 +60,4 @@ local function translator(input, seg)
    end
 end
 
-return make("Control+t", translator)
+return make("Control+y", translator)

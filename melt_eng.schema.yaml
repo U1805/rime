@@ -56,12 +56,6 @@ speller:
 translator:
   dictionary: melt_eng
   spelling_hints: 9
-  
-# 按键绑定
-key_binder:
-  import_preset: default
-  bindings:    
-    # - { when: always, accept: Shift+Shift_R, select: flypy_flypy }
 
 punctuator:
   import_preset: default

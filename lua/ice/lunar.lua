@@ -645,9 +645,8 @@ end
 -- 从 lunar: nl 获取农历触发关键字（双拼默认为 lunar）
 -- 从 recognizer/patterns/gregorian_to_lunar 获取第 2 个字符作为公历转农历的触发前缀，默认为 N
 local function translator(input, seg, env)
-    -- env.lunar_key_word = env.lunar_key_word or
-    --     (env.engine.schema.config:get_string(env.name_space:gsub('^*', '')) or 'nl')
-    env.lunar_key_word = "lunar"
+    env.lunar_key_word = env.lunar_key_word or
+        (env.engine.schema.config:get_string(env.name_space:gsub('^*', '')) or 'lunar')
     env.gregorian_to_lunar = env.gregorian_to_lunar or
         (env.engine.schema.config:get_string('recognizer/patterns/gregorian_to_lunar'):sub(2, 2) or 'N')
     if input == env.lunar_key_word then

@@ -10,13 +10,14 @@ schema:
     - Functoreality
     - Dvel
     - gaboolic （裁缝)
+    - amzxyz
     - Modified by dai0v0
   description: |
     小鹤双拼+辅助码 https://github.com/gaboolic/rime-shuangpin-fuzhuma
-    稍微的改了一下（小声
+    改用万象词库
   dependencies:
     - stroke
-    - radical_flypy
+    - radical_pinyin
     - emoji
     - melt_eng
     - japanese
@@ -24,9 +25,11 @@ schema:
 
 switches:
   - name: ascii_mode
-    states: [ 文, A ]
+    states: [ 中, 英 ]
+  - name: ascii_punct  # 中英标点
+    states: [ ¥, $ ]
   - name: full_shape
-    states: [ $, ￥ ]
+    states: [ 半, 全 ]
   - name: traditionalization
     states: [ 简, 繁 ]
   - name: emoji
@@ -37,14 +40,21 @@ switches:
     states: [ 地, 煋 ] #火星文
   - name: others
     reset: 1
-  # - name: ascii_punct
-  #   states: [ 。，, ．， ]
+  - name: tone_display
+    states: [ 调, 音 ]
+  - name: fuzhu_switch
+    states: [ 助, 辅 ]
+    reset: 1
+  - name: search_single_char  # search.lua 的功能开关，辅码查词时是否单字优先
+    abbrev: [词, 单]
+    states: [正常, 单字]
 
 engine:
   processors:
-    - lua_processor@*moqi/key_binder          # 绑定按键match
-    - lua_processor@*crane/shortcut_processor # 小鹤直通车
-    - lua_processor@*cloud/baidu_processor    # 云输入
+    - lua_processor@*wanxiang/quick_symbol_text    # 快符引导以及重复上屏
+    - lua_processor@*moqi/key_binder               # 绑定按键扩展能力match
+    - lua_processor@*crane/shortcut_processor      # 小鹤直通车
+    - lua_processor@*cloud/baidu_processor         # 云输入
     - ascii_composer
     - recognizer
     - key_binder
@@ -57,6 +67,8 @@ engine:
     - ascii_segmentor
     - matcher
     - abc_segmentor
+    - affix_segmentor@radical_lookup  # 部件拆字自定义 tag
+    - affix_segmentor@reverse_stroke  # 笔画反查
     - punct_segmentor
     - affix_segmentor@emojis
     - affix_segmentor@pinyin
@@ -65,23 +77,21 @@ engine:
     - fallback_segmentor
   translators:
     - punct_translator
-    - table_translator@my_custom_phrase
-    - table_translator@melt_eng_in_cn
     - table_translator@custom_phrase
+    - table_translator@melt_eng_in_cn
+    - table_translator@custom_phrase_xh
     - table_translator@custom_phrase_kf
     - table_translator@custom_phrase_xhzg
     - table_translator@custom_phrase_super_1jian
     - table_translator@custom_phrase_super_2jian
     - table_translator@custom_phrase_super_3jian
-    - table_translator@custom_phrase_super_3jian_no_conflict
-    - table_translator@custom_phrase_super_4jian_no_conflict
-    - reverse_lookup_translator
-    - reverse_lookup_translator@reverse_stroke
+    - table_translator@radical_lookup        # 部件拆字反查
+    - table_translator@reverse_stroke        # 笔画反查
     - script_translator
     - script_translator@pinyin
-    - script_translator@emojis           # 添加注释后：停用ae模式emoji输入
-    - script_translator@melt_eng         # 添加注释后：停用单词输入
-    - script_translator@japanese         # 添加注释后：停用日语输入
+    - script_translator@emojis               # 临时 emoji 输入
+    - script_translator@melt_eng             # 临时单词输入
+    - script_translator@japanese             # 临时日语输入
     - lua_translator@*melt
     - lua_translator@*ice/date_translator    # 时间、日期、星期
     - lua_translator@*ice/lunar              # 农历
@@ -90,103 +100,75 @@ engine:
     - lua_translator@*moqi/calculator        # 计算器
     - lua_translator@*crane/shortcut_translator  # 小鹤直通车
     - lua_translator@*cloud/baidu_translator # 云输入
+    - lua_translator@*wanxiang/force_gc      # 暴力 GC 降低内存
   filters:
-    - lua_filter@*ice/is_in_user_dict        # 用户词典的词加上一个*
     - lua_filter@*ice/long_word_filter       # 长词优先（顺序要求：长词优先 > Emoji）
     - lua_filter@*ice/autocap_filter         # 英文自动大写
-    - lua_filter@*moqi/stick                 # tab置顶词回显在第一个comment中
     - lua_filter@*moqi/reduce_emoji_filter   # 按需启用，作用是降低Emoji在候选项中的位置排序(顺序要求：Emoji > 降低排序)
-    - simplifier@emoji                       # Emoji
-    - simplifier@chinese_english             # 中英词典
-    - simplifier@traditionalize              # 简繁切换
-    - simplifier@mars                        # 火星文
-    - simplifier@others                      # 月份星期/符号/部首/人名/生僻字...
+    - reverse_lookup_filter@radical_reverse_lookup  # 部件拆字滤镜，放在pro_comment_format前面，进一步被超级注释处理以获得拼音编码+辅助码的提示
+    - lua_filter@*wanxiang/pro_preedit_format                #输入码显示全拼并带上音调
+    - simplifier@emoji                             # Emoji
+    - simplifier@chinese_english                   # 中英词典
+    - simplifier@traditionalize                    # 简繁切换
+    - simplifier@mars                              # 火星文
+    - simplifier@others                            # 月份星期/符号/部首/人名/生僻字...
+    - simplifier@pinyinhint                        #注释里显示汉字读音，多音字支持
+    - lua_filter@*wanxiang/search@radical_pinyin   # 部件拆字辅码放在简繁转换之后
+    - lua_filter@*ice/is_in_user_dict              # 用户词典的词加上一个*
+    - lua_filter@*wanxiang/en_spacer               #启用时中文状态下输入英文单词后面自动追加空格
+    - lua_filter@*wanxiang/pro_comment_format                #超级注释模块，支持错词提示、辅助码显示，部件组字读音注释，支持个性化配置和关闭相应的功能，详情搜索pro_comment_format进行详细配置
+    - lua_filter@*moqi/stick                       # tab置顶词回显在第一个comment中
     - uniquifier
 
+# 标点符号
+punctuator:
+  import_preset: symbols
+
+#语言模型
+# grammar:
+#   language: zh-hans-t-essay-bgw
+__include: octagram   #启用语言模型
+octagram:
+  __patch:
+    grammar:
+      language: amz-v3n2m1-zh-hans  
+      collocation_max_length: 4
+      collocation_min_length: 2
+    translator/contextual_suggestions: true
+    translator/max_homophones: 7
+    translator/max_homographs: 7
+
+
+################################## 方案组合 #############################
+
+set_shuru_schema:           #配置此项就是选择什么输入法,同时拆分反查和中英文混输也将匹配该输入方案
+  __include: wanxiang:/algebra_flypy  #可选解码规则有   algebra_pinyin, algebra_zrm, algebra_flypy,  algebra_ziguang, algebra_sogou, algebra_mspy, algebra_abc  选择一个填入
+set_algebra_fuzhu:          #配置此项就是选择什么辅助码
+  __include: wanxiang:/fuzhu_flypy    #可选辅助码有：fuzhu_kong，fuzhu_moqi, fuzhu_zrm, fuzhu_flypy, fuzhu_tiger, fuzhu_cj, fuzhu_wubi, fuzhu_jdh, fuzhu_hanxin 选择一个填入
+pro_comment_format:            # 超级注释模块，子项配置 true 开启，false 关闭
+  fuzhu_code: true             # 启用辅助码提醒，用于辅助输入练习辅助码，成熟后可关闭
+  candidate_length: 1          # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理    
+  fuzhu_type: flypy            # 用于匹配对应的辅助码注释显示，基于默认词典的可选注释类型有：( moqi, flypy, zrm, jdh, cj, tiger, wubi, hanxin) tone (这个参数特殊，在注释里显示声调，不算辅助码，也填入此处)选择一个填入，之所以单独列出是因为这里有更多的可配置性，而真正的辅助码默认只有8种
+  corrector_type: "{comment}"  # 换一种显示类型，比如"({comment})" 
+
 speller:
+  # 三字母及以上唯一码直接上屏
+  auto_select: true
+  auto_select_pattern: ^[a-z]+/|^[a-df-zA-DF-Z]\w{2,}|^e\w{3,} 
   # 如果不想让什么标点直接上屏，可以加在 alphabet，或者编辑标点符号为两个及以上的映射
-  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/`;
+  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/`;'
   # initials 定义仅作为始码的按键，排除 ` 让单个的 ` 可以直接上屏
   initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/
   # 第一位<空格>是拼音之间的分隔符；第二位<'>表示可以手动输入单引号来分割拼音。
-  delimiter: " '"
+  delimiter: " "
   algebra:
-    # 日语长音促音规则
-    - 'derive/_/x/'
-    - 'derive/-/q/'
-  
-    - derive/^(\w\w);(\w)(\w)$/$1$2`/  # ABC`
-    - derive/^(\w\w);(\w)(\w)$/$1`$3/  # AB`D
-    - derive/^(\w\w);(\w)(\w)$/$1``/   # AB``
-    # - derive/^(\w\w);(\w)(\w)$/``$2$3/  # ``CD
-    
-    # 模糊音 可选择性开启
-    # - derive/^z([a-z])/v$1/
-    # - derive/^c([a-z])/i$1/
-    # - derive/^s([a-z])/u$1/
-    # - derive/^v([a-z])/z$1/
-    # - derive/^i([a-z])/c$1/
-    # - derive/^u([a-z])/s$1/
-    - derive/^ud/uk/ # shuai <-> shai
-    - derive/^uk/ud/
-    - derive/^vv/vy/ # zhui <-> zhun
-    - derive/^vy/vv/
+    __patch:
+      - set_shuru_schema     #拼音转双拼码
+      - wanxiang:/mohuyin              #模糊音选择性开启
+      - set_algebra_fuzhu    #辅助码部分
+      - wanxiang:/wannengma            #万能码选择性开启
 
-    # 辅助码
-    - derive/^(..)[;].+$/$1/
-    - derive/^(..[;].).+$/$1/
-    - derive/[;]//
-
-translator:
-  dictionary: flypy_flypy
-  enable_completion: false
-  ##  默认为不超过 2 个字的候选项显示输入码；将 2 改为 0 可关闭编码提示，
-  ##  改为 1 则是只显示单字的输入码，依此类推。
-  spelling_hints: 1
-  comment_format:
-    - "xform/(^|[ '])[^;]+[;]/$1/" ## 编码提示只显示辅助码部分
-
-  enable_user_dict: true # 是否开启自动调频
-  initial_quality: 1.2  # 拼音权重 1.2
-
-# 自定义词库
-my_custom_phrase:
-  dictionary: ""
-  user_dict: custom_phrase
-  db_class: stabledb
-  enable_completion: false
-  enable_sentence: true
-  initial_quality: 1
-
-melt_eng_in_cn:
-  dictionary: melt_eng
-  enable_sentence: false   # 禁止造句
-  enable_user_dict: false  # 禁用用户词典
-  initial_quality: 1.1     # 英文权重 1.1
-  comment_format:          # 自定义提示码
-    - xform/.*//           # 清空提示码（就是没有那个小尾巴）
-
-grammar:
-  language: zh-hans-t-essay-bgw
-
-reverse_lookup:
-  dictionary: radical_flypy # https://github.com/mirtlecn/rime-radical-pinyin
-  enable_completion: true
-  prefix: "az"
-  suffix: "'"
-  tips: 〔部件组字〕
-  preedit_format:
-    # - xlit/hspnz/一丨丿丶乙/
-
-reverse_stroke:
-  tag: reverse_stroke
-  dictionary: stroke # stroke
-  enable_completion: true
-  prefix: "ab"
-  suffix: "'"
-  tips: 〔笔画hspnz〕 # 〔筆畫〕
-  preedit_format:
-    - xlit/hspnz/一丨丿丶乙/
+################################## 快捷键触发 #############################
 
 # Emoji
 emoji:
@@ -219,41 +201,50 @@ others:
   option_name: others
   opencc_config: others.json
 
-# 标点符号
-punctuator:
-  import_preset: symbols
-
 # 按键绑定
 key_binder:
   import_preset: default
+  search: ";"  # 辅码引导符，要添加到 speller/alphabet
   bindings:
     - { when: always, accept: Control+1, toggle: emoji }              # 切换是否显示 Emoji
     - { when: always, accept: Control+2, toggle: traditionalization } # 切换简繁
     - { when: always, accept: Control+3, toggle: chinese_english }    # 中英互译
+    - { when: has_menu, accept: "Control+4", toggle: "tone_display" }
+    - { when: has_menu, accept: "Control+5", toggle: fuzhu_switch }
     # - { when: has_menu, accept: semicolon, send: 2 }
     # - { when: has_menu, accept: slash, send: 3 }
-    - { match: "[a-z]{1,4}", accept: Tab,  send_sequence: "/1" }      # 简拼
-    # - { when: always, accept: Shift+Shift_R, select: japanese }       # 右shift切中日英
+    - { when: has_menu, accept: "Tab", send: "Control+Right" }           # 使用 tab 在不同音节之间跳转
+    - { when: composing, accept: "Tab", send: "Control+Right" }
+    - { match: "[a-z]{1,4}", accept: backslash,  send_sequence: "/1" }   # 简拼
 
-recognizer:
-  # import_preset: default
-  patterns:
-    punct: "^/([0-9]0?|[A-Za-z]+)$" # 响应 symbols.yaml 内的输入
-    ## 拆字、笔画:
-    reverse_lookup: "^az[a-z]*'?$" # "[[]b[a-z]*'?$"
-    reverse_stroke: "^ab[A-Za-z]*$"
-    ## 临时输入
-    emojis: "^ae[a-z]*'?$"
-    melt_eng: "^aw[A-Za-z]*"
-    japanese: "^aj[a-z]*"
-    pinyin: "^ap[a-z]*'?$"
-    ## 功能
-    calculator: "^V.*$"                 # 计算器需要用
-    unicode: "^U[a-f0-9]+"              # 响应 lua_translator@unicode，输出 Unicode 字符
-    number: "^R[0-9]+[.]?[0-9]*"        # 响应 lua_translator@number_translator，数字金额大写
-    gregorian_to_lunar: "^N[0-9]{1,8}"  # 响应 lua_translator@lunar，公历转农历，输入 N20240115 得到「二〇二三年腊月初五」
+################################## 前缀触发 #############################
 
-################################## 功能词典 #############################
+radical_lookup:
+  tag: radical_lookup
+  dictionary: radical_pinyin # https://github.com/mirtlecn/rime-radical-pinyin
+  enable_completion: true
+  prefix: "az"
+  suffix: "'"
+  tips: 〔部件组字〕
+  preedit_format:
+    - erase/^.*$//
+
+reverse_stroke:
+  tag: reverse_stroke
+  dictionary: stroke # stroke
+  enable_completion: true
+  prefix: "ab"
+  suffix: "'"
+  tips: 〔笔画hspnz〕 # 〔筆畫〕
+  preedit_format:
+    - xlit/hspnz/一丨丿丶乙/
+
+# 部件拆字滤镜
+radical_reverse_lookup:
+  tags: [ radical_lookup,reverse_stroke ]
+  overwrite_comment: true
+  dictionary: wanxiang #带音调的词典
+
 emojis:
   tag: emojis
   dictionary: emoji
@@ -289,18 +280,79 @@ japanese:
 pinyin:
   tag: pinyin
   prism: pinyin_simp
-  dictionary: pinyin_simp 
+  dictionary: wanxiang 
   enable_completion: false
   enable_sentence: true
   prefix: "ap"
   suffix: "'"
   tips: "〔全拼〕"
 
-################################## 简码词典 #############################
-# 小鹤简码
+recognizer:
+  import_preset: default
+  patterns:
+    punct: "^/([0-9]0?|[A-Za-z]+)$" # 响应 symbols.yaml 内的输入
+    ## 拆字、笔画:
+    radical_lookup: "^az[a-z]*'?$" # "[[]b[a-z]*'?$"
+    reverse_stroke: "^ab[A-Za-z]*$"
+    ## 临时输入
+    emojis: "^ae[a-z]*'?$"
+    melt_eng: "^aw[A-Za-z]*"
+    japanese: "^aj[a-z]*"
+    pinyin: "^ap[a-z]*'?$"
+    ## 功能
+    calculator: "^V.*$"                 # 计算器需要用
+    unicode: "^U[a-f0-9]+"              # 响应 lua_translator@unicode，输出 Unicode 字符
+    number: "^R[0-9]+[.]?[0-9]*"        # 响应 lua_translator@number_translator，数字金额大写
+    gregorian_to_lunar: "^N[0-9]{1,8}"  # 响应 lua_translator@lunar，公历转农历，输入 N20240115 得到「二〇二三年腊月初五」
+    quick_symbol: "^'.*$"               # 快符引导，例如输入'q 后自动上屏快速符号，双击''重复上屏符号
+    quick_text: "^;.*$"                 # 双击;;重复上屏汉字和字母
+
+################################## 词库词典 #############################
+
+translator:
+  dictionary: wanxiang          # 挂载词库 wanxiang.dict.yaml
+  prism: flypy_flypy            # 多方案共用一个词库时，为避免冲突，需要用 prism 指定一个名字。
+  contextual_suggestions: true   #上下文建议开启〔需配合 grammar 使用〕
+  prioritize_quality: true  # 启用优先质量选项
+  enable_completion: true  # 启用候选词补全
+  max_candidates: 10  # 设置最大候选词数量
+#  punctuation_model: default  # 设置标点符号模型
+#  single_char_first: true  # 优先显示单个字符
+#  candidate_filter: "^(?!abc).*$"  # 过滤掉包含 "abc" 的候选词
+#  user_dict: zrm.userdb  # 用户词典的文件名称
+#  db_class: tabledb  #开启后就不会产生zrm.userdb这样的文件夹，会直接输出文本zrm.txt同时无法使用同步能力
+
+  enable_correction: false       #是否开启自动纠错
+  encode_commit_history: true    # 预留历史上屏自动编码成词
+  spelling_hints: 50             # 将注释以词典字符串形式完全暴露，通过pro_comment_format.lua完全接管，灵活配置。
+  always_show_comments: true     # Rime 默认在 preedit 等于 comment 时取消显示 comment，这里强制一直显示，供pro_comment_format.lua做判断用。
+  comment_format: {comment}      #将注释以词典字符串形式完全暴露，通过pro_comment_format.lua完全接管，灵活配置。
+  preedit_format:                # preedit_format 影响到输入框的显示和“Shift+回车”上屏的字符
+
+  enable_user_dict: true # 是否开启自动调频
+  initial_quality: 1.2   # 拼音权重 1.2
+
+# 自定义词库
 custom_phrase:
   dictionary: ""
-  user_dict: cn_dicts_xh/custom_phrase/custom_phrase
+  user_dict: custom_phrase
+  db_class: stabledb
+  enable_completion: false
+  enable_sentence: true
+  initial_quality: 1
+
+melt_eng_in_cn:
+  dictionary: melt_eng
+  enable_sentence: false   # 禁止造句
+  enable_user_dict: false  # 禁用用户词典
+  initial_quality: 1.1     # 英文权重 1.1
+  comment_format:          # 自定义提示码
+    - xform/.*//           # 清空提示码（就是没有那个小尾巴）
+
+# 小鹤简码
+custom_phrase_xh:
+  dictionary: ""
+  user_dict: jm_dicts/custom_phrase_xh
   db_class: stabledb
   enable_completion: false
   enable_sentence: false
@@ -309,7 +361,7 @@ custom_phrase:
 # 小鹤快符
 custom_phrase_kf:
   dictionary: ""
-  user_dict: cn_dicts_xh/custom_phrase/custom_phrase_kf
+  user_dict: jm_dicts/custom_phrase_kf
   db_class: stabledb
   enable_sentence: false
   enable_completion: false
@@ -318,7 +370,7 @@ custom_phrase_kf:
 # 小鹤字根
 custom_phrase_xhzg:
   dictionary: ""
-  user_dict: cn_dicts_xh/custom_phrase/custom_phrase_xhzg
+  user_dict: jm_dicts/custom_phrase_xhzg
   db_class: stabledb
   enable_sentence: false
   enable_completion: false
@@ -327,7 +379,7 @@ custom_phrase_xhzg:
 # 超强tab 1码
 custom_phrase_super_1jian:
   dictionary: ""
-  user_dict: cn_dicts_xh/custom_phrase/custom_phrase_super_1jian
+  user_dict: jm_dicts/custom_phrase_super_1jian
   db_class: stabledb
   enable_sentence: false
   enable_completion: false
@@ -336,7 +388,7 @@ custom_phrase_super_1jian:
 # 超强tab 2码
 custom_phrase_super_2jian:
   dictionary: ""
-  user_dict: cn_dicts_xh/custom_phrase/custom_phrase_super_2jian
+  user_dict: jm_dicts/custom_phrase_super_2jian
   db_class: stabledb
   enable_sentence: false
   enable_completion: false
@@ -345,7 +397,7 @@ custom_phrase_super_2jian:
 # 超强tab 3码
 custom_phrase_super_3jian:
   dictionary: ""
-  user_dict: cn_dicts_xh/custom_phrase/custom_phrase_super_3jian
+  user_dict: jm_dicts/custom_phrase_super_3jian
   db_class: stabledb
   enable_sentence: false
   enable_completion: false

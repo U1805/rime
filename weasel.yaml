@@ -4,30 +4,66 @@
 
 config_version: "2023-10-10"
 
+# [app_options]
+# 针对特定应用的设置
+app_options:
+  cmd.exe:             # 带 .exe 的进程名：Weasel 15.0 及之前版本须小写; PR #1049 合并后释出的版本大小写不敏感
+    ascii_mode: true   # 英文模式
+    ascii_punct: true
+  windowsterminal.exe:
+    ascii_mode: true
+  pwsh.exe:
+    ascii_mode: true
+  powershell.exe:
+    ascii_mode: true
+  idea64.exe:
+    ascii_mode: false
+    ascii_punct: true
+  code.exe:
+    ascii_mode: false
+    ascii_punct: true
+  firefox.exe:
+    inline_preedit: true # 行内显示预编辑区：规避 <https://github.com/rime/weasel/issues/946>
+  conhost.exe:
+    ascii_mode: true
+  photoshop.exe: 
+    ascii_mode: true
+# [End of <app_options>]
+
+# [global settings]
+show_notifications: true                   # 是否显示状态变化的通知：true；false；option_list（方案内的开头 option）
+show_notifications_time: 1200              # 通知显示的时间，单位 ms
+global_ascii: false                        # 切换为 ascii 模式时，是否影响所有窗口：true；false
+# [End of <global settings>]
+
+# [style]
+# 字体；候选项、候选窗口的行为、布局及样式
 style:
-  antialias_mode: default # 抗锯齿模式
-  ascii_tip_follow_cursor: false # ASCII提示跟随光标
-  display_tray_icon: false # 显示系统托盘图标
+  antialias_mode: default            # 抗锯齿模式
+  ascii_tip_follow_cursor: false     # ASCII提示跟随光标
+  display_tray_icon: false           # 显示系统托盘图标
 
-  fullscreen: false # 全屏候选词窗口
-  inline_preedit: true # 在光标位置显示预编辑文本
-  preedit_type: composition # 预编辑文本类型
-  mouse_hover_ms: 0 # 鼠标悬停选词响应时间，若设置过低，鼠标在候选框上时会影响选词，值为 0 或将这行注释禁用此功能
-  paging_on_scroll: false # 鼠标滚轮翻页候选词
+  fullscreen: false                  # 全屏候选词窗口
+  inline_preedit: true               # 在光标位置显示预编辑文本
+  preedit_type: composition          # 预编辑文本类型
+  # mouse_hover_ms: 0                # ! 已弃用。鼠标悬停选词响应时间，若设置过低，鼠标在候选框上时会影响选词，值为 0 或将这行注释禁用此功能
+  paging_on_scroll: false            # 鼠标滚轮翻页候选词
+  click_to_capture: false            # 鼠标点击候选项，创建截图：true；false
 
-  horizontal: false # 水平排列候选词
-  font_face: Segoe UI Emoji:30:39, Noto Color Emoji, Microsoft YaHei # 主要字体
-  label_font_face: Microsoft YaHei # 标签字体
+  horizontal: false                  # 水平排列候选词
+  font_face: "Segoe UI Emoji, Microsoft YaHei, SF Pro, Noto Color Emoji"
+  label_font_face: Microsoft YaHei   # 标签字体
   comment_font_face: Microsoft YaHei # 注释字体
-  font_point: 14 # 主要字体大小
-  label_font_point: 14 # 标签字体大小
-  comment_font_point: 14 # 注释字体大小
-  mark_text: "" # 标记文本
+  font_point: 14                     # 主要字体大小
+  label_font_point: 14               # 标签字体大小
+  comment_font_point: 14             # 注释字体大小
+  mark_text: ""                      # 标记文本
 
-  vertical_auto_reverse: false # 垂直排列时自动反转顺序
-  vertical_text: false # 垂直文本显示
+  vertical_auto_reverse: false       # 垂直排列时自动反转顺序
+  vertical_text: false               # 垂直文本显示
   vertical_text_left_to_right: false # 垂直文本从左到右显示
-  vertical_text_with_wrap: false # 垂直文本自动换行
+  vertical_text_with_wrap: false     # 垂直文本自动换行
+  candidate_abbreviate_length: 30    # 候选项略写，超过此数字则用省略号代替。设置为 0 则不启用此功能
 
   # 这里提供两种不同主题配置，自行切换注释即可
   # 必须启用其中一种预设！

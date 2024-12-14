@@ -10,8 +10,25 @@ schema:
   description: |
     源自 Android 拼音
     schema 取自 袖珍简化字拼音
+    改自万象词库
   dependencies:
     - stroke
+
+switches:
+  - name: ascii_mode
+    states: [ 中, 英 ]
+  - name: ascii_punct  # 中英标点
+    states: [ ¥, $ ]
+  - name: full_shape
+    states: [ 半, 全 ]
+  - name: emoji
+    reset: 0 # 默认状态: 0 关闭 1 开启
+    states: [ 💀, 😄 ]
+  - name: mars
+    reset: 0
+    states: [ 地, 煋 ] #火星文
+  - name: others
+    reset: 1
 
 engine:
   processors:
@@ -33,31 +50,95 @@ engine:
     - punct_translator
     - script_translator
     - reverse_lookup_translator
+  filters:
+    - simplifier@emoji                             # Emoji
+    - simplifier@chinese_english                   # 中英词典
+    - simplifier@traditionalize                    # 简繁切换
+    - simplifier@mars                              # 火星文
+    - simplifier@others                            # 月份星期/符号/部首/人名/生僻字...
+    - uniquifier
+
+
+# 标点符号
+punctuator:
+  import_preset: symbols
+
+#语言模型
+__include: octagram   #启用语言模型
+octagram:
+  __patch:
+    grammar:
+      language: amz-v3n2m1-zh-hans  
+      collocation_max_length: 4
+      collocation_min_length: 2
+    translator/contextual_suggestions: true
+    translator/max_homophones: 7
+    translator/max_homographs: 7
+
+
+################################## 方案组合 #############################
+
+set_shuru_schema:
+  __include: wanxiang:/algebra_pinyin
+set_algebra_fuzhu: 
+  __include: wanxiang:/fuzhu_kong
+pro_comment_format:
+  fuzhu_code: false
 
 speller:
   alphabet: zyxwvutsrqponmlkjihgfedcba/
   delimiter: " '"
   algebra:
-    - erase/^hm$/
-    - erase/^m$/
-    - erase/^n$/
-    - erase/^ng$/
-    - abbrev/^([a-z]).+$/$1/
-    - abbrev/^([zcs]h).+$/$1/
-    - derive/^([nl])ue$/$1ve/
-    - derive/^([jqxy])u/$1v/
-    - derive/un$/uen/
-    - derive/ui$/uei/
-    - derive/iu$/iou/
-    - derive/([aeiou])ng$/$1gn/
-    - derive/([dtngkhrzcs])o(u|ng)$/$1o/
-    - derive/ong$/on/
-    - derive/ao$/oa/
-    - derive/([iu])a(o|ng?)$/a$1$2/
+    __patch:
+      - set_shuru_schema     #拼音转双拼码
+      - set_algebra_fuzhu    #辅助码部分
 
+################################## 快捷键触发 #############################
+# Emoji
+emoji:
+  option_name: emoji
+  opencc_config: emoji.json
+  inherit_comment: false  # 在 corrector.lua 及反查中，emoji 返回空注释
+
+# 简繁切换
+traditionalize:
+  option_name: traditionalization
+  opencc_config: s2tw.json  # s2t.json | s2hk.json | s2tw.json | s2twp.json
+  tips: char               # 转换提示: all 都显示 | char 仅单字显示 | none 不显示。
+  tags: [ abc, number, gregorian_to_lunar ]  # 限制在对应 tag，不对其他如反查的内容做简繁转换# 火星文切换
+
+# 火星文切换
+mars:
+  opencc_config: martian.json 
+  option_name: mars
+
+#中文转英文
+chinese_english:
+  option_name: chinese_english
+  opencc_config: chinese_english.json
+  tips: char
+  comment_format:
+    - "xform/-/ /"
+
+# 按键绑定
+key_binder:
+  import_preset: default
+  bindings:
+    - { when: always, accept: Control+1, toggle: emoji }              # 切换是否显示 Emoji
+    - { when: always, accept: Control+2, toggle: traditionalization } # 切换简繁
+    - { when: always, accept: Control+3, toggle: chinese_english }    # 中英互译
+recognizer:
+  import_preset: default
+
+################################## 词库词典 #############################
 translator:
-  dictionary: pinyin_simp
-  preedit_format:
-    - xform/([nl])v/$1ü/
-    - xform/([nl])ue/$1üe/
-    - xform/([jqxy])v/$1u/
+  dictionary: wanxiang          # 挂载词库 wanxiang.dict.yaml
+  prism: pinyin_simp            # 多方案共用一个词库时，为避免冲突，需要用 prism 指定一个名字。
+  contextual_suggestions: true  #上下文建议开启〔需配合 grammar 使用〕
+  prioritize_quality: true      # 启用优先质量选项
+  enable_completion: true       # 启用候选词补全
+  max_candidates: 10            # 设置最大候选词数量
+  enable_correction: false      #是否开启自动纠错
+  encode_commit_history: true   # 预留历史上屏自动编码成词
+  spelling_hints: false
+  always_show_comments: false 

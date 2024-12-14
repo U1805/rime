@@ -6,7 +6,7 @@ name: japanese
 version: 'v0.2-20180411'
 
 import_tables:
-  - dicts_jp/japanese.mozc
-  - dicts_jp/japanese.jmdict
-  - dicts_jp/japanese.kana
-  - dicts_jp/japanese.custom
+  - jp_dicts/japanese.mozc
+  - jp_dicts/japanese.jmdict
+  - jp_dicts/japanese.kana
+  - jp_dicts/japanese.custom

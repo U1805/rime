@@ -6,16 +6,13 @@
 local M = {}
 
 function M.init(env)
-    -- 提升 count 个词语，插入到第 idx 个位置，默认 2、4。
-    -- local config = env.engine.schema.config
-    -- env.name_space = env.name_space:gsub("^*", "")
-    -- M.count = config:get_int(env.name_space .. "/count") or 2
-    -- M.idx = config:get_int(env.name_space .. "/idx") or 4
+    -- 提升 count 个词语，插入到第 idx 个位置，默认 2、1。
+    -- 示例：将 2 个词插入到第 1  个候选项，输入 总算 得到「1总算 2纵」
+    local config = env.engine.schema.config
+    env.name_space = env.name_space:gsub("^*", "")
+    M.count = config:get_int(env.name_space .. "/count") or 2
+    M.idx = config:get_int(env.name_space .. "/idx") or 1
 
-    -- # 提升 count 个词语，插入到第 idx 个位置。
-    -- # 示例：将 2 个词插入到第 1  个候选项，输入 总算 得到「1总算 2纵」
-    M.count = 2
-    M.idx = 1
     M.input_str = env.engine.context.input
 end
 
