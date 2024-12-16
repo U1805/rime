@@ -23,10 +23,10 @@ import_tables:
   - jm_dicts/chengyu  # 简拼四字成语
 
   # 维基词库 https://github.com/felixonmars/fcitx5-pinyin-zhwiki、https://github.com/outloudvi/mw2fcitx
-  - cn_dicts/cell/moegirl.flypy
   # 细胞词库 https://github.com/Bambooin/rimerc
-  - cn_dicts/cell/luna_pinyin.computer
   # 细胞词库 https://github.com/thunlp/THUOCL
+  - cn_dicts/cell/moegirl
+  - cn_dicts/cell/luna_pinyin.computer
 ...
 
 

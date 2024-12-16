@@ -9,7 +9,8 @@
 ## 特性
 
 - 打词时插入鹤形作辅助码 ✎ eg. 寄宿 `jisub` 极速 `jimsu`
-- 单字辅助码增强 ✎ eg. 森面 `sfmm` vs. 森 `sfmm/` / `sfmmo`
+- 单字辅助码增强(结尾添加o或/) ✎ eg. 森面 `sfmm` vs. 森 `sfmm/` / `sfmmo`
+- 在双拼输入末尾键入 `;` 激活[整句辅助](https://github.com/HowcanoeWang/rime-lua-aux-code)模式，键入 `'` 激活单字辅助模式
 - 优化英文输入体验，取自[雾凇拼音](https://dvel.me/posts/make-rime-en-better/)
 - 好看的皮肤 [win11_preset](https://github.com/LufsX/rime)
 - 万象语言模型、万象原子词库
@@ -17,11 +18,11 @@
 ### 前缀触发
 
 - 反查: `ab` 前缀进行笔画输入 ✎ eg. 木 `abhspn`
-- 反差: `az` 前缀进行[部首](https://github.com/mirtlecn/rime-radical-pinyin)输入 ✎ eg. 晶 `azririri`
-- 临时输入: `ae` 前缀临时输入 emoji ✎ eg. 🐧 `aeqiee`
+- 反查: `az` 前缀进行[部首](https://github.com/mirtlecn/rime-radical-pinyin)输入 ✎ eg. 晶 `azririri`
+- 临时输入: `ae` 前缀临时输入emoji ✎ eg. 🐧 `aeqiee`
 - 临时输入: `aw` 前缀临时输入[英文](https://github.com/tumuyan/rime-melt) ✎ eg. myGo `awmygo`
 - 临时输入: `aj` 前缀临时输入[日文](https://github.com/gkovacs/rime-japanese) ✎ eg. 春日影 `ajharuhikage` 
-- 临时输入: `ap` 前缀临时输入[全拼](https://github.com/iDvel/rime-ice) ✎ eg. 炸梦我去 `apzhamengwoqu`
+- 临时输入: `ap` 前缀临时输入全拼 ✎ eg. 炸梦我去 `apzhamengwoqu`
 - 农历输入: `N` 开头 ✎ eg. 二〇二四年四月初八 `N20240515`
 - 大写数字: `R` 开头 ✎ eg. 拾壹萬肆仟伍佰壹拾肆 `R114514`
 - Unicode输入: `U` 开头 ✎ eg. ⿻ `U2ffb`
@@ -39,12 +40,12 @@
 - ``` ` ``` 万能键 ✎ eg. 鹤 ```he`n```
 - `Tab` 循环切换音节: 当输入多个字词时想要给前面补充辅助码，可以多次按下tab循环切换
 - `\` 超级简拼：1码、2码、3码时，按下 `\` 自动上屏1字、2字词、3字词，不和空格上屏的单字冲突
-- `/` 开头符号输入 ，`/help` 查看帮助，另支持[常用 Latex 符号](https://github.com/wklchris/
+- `/` 开头符号输入 ，`/help` 查看帮助，另支持[常用 Latex 符号](https://github.com/wklchris/Rime-latex-symbols) 
 - `'` 快符： 通过单引号键引导的26字母快速符号自动上屏，双击''重复上一个符号
 - `;` 快符： 双击;;重复上屏汉字和字母
 - `Control+y` 云输入功能：复制[simplehttp.dll](https://github.com/hchunhui/librime-cloud)，在输入状态下触发云输入
 - `Shift + Del` 可以删除错误词频 
-- `Shift + ⌫` 可以删除单个汉字的拼音Rime-latex-symbols) 
+- `Shift + ⌫` 可以删除单个汉字的拼音
 
 ## 按键绑定
 

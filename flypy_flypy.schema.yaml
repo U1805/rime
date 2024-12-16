@@ -45,9 +45,6 @@ switches:
   - name: fuzhu_switch
     states: [ 助, 辅 ]
     reset: 1
-  - name: search_single_char  # search.lua 的功能开关，辅码查词时是否单字优先
-    abbrev: [词, 单]
-    states: [正常, 单字]
 
 engine:
   processors:
@@ -106,18 +103,17 @@ engine:
     - lua_filter@*ice/autocap_filter         # 英文自动大写
     - lua_filter@*moqi/reduce_emoji_filter   # 按需启用，作用是降低Emoji在候选项中的位置排序(顺序要求：Emoji > 降低排序)
     - reverse_lookup_filter@radical_reverse_lookup  # 部件拆字滤镜，放在pro_comment_format前面，进一步被超级注释处理以获得拼音编码+辅助码的提示
-    - lua_filter@*wanxiang/pro_preedit_format                #输入码显示全拼并带上音调
+    - lua_filter@*wanxiang/pro_preedit_format      #输入码显示全拼并带上音调
     - simplifier@emoji                             # Emoji
     - simplifier@chinese_english                   # 中英词典
     - simplifier@traditionalize                    # 简繁切换
     - simplifier@mars                              # 火星文
     - simplifier@others                            # 月份星期/符号/部首/人名/生僻字...
-    - simplifier@pinyinhint                        #注释里显示汉字读音，多音字支持
-    - lua_filter@*wanxiang/search@radical_pinyin   # 部件拆字辅码放在简繁转换之后
     - lua_filter@*ice/is_in_user_dict              # 用户词典的词加上一个*
-    - lua_filter@*wanxiang/en_spacer               #启用时中文状态下输入英文单词后面自动追加空格
-    - lua_filter@*wanxiang/pro_comment_format                #超级注释模块，支持错词提示、辅助码显示，部件组字读音注释，支持个性化配置和关闭相应的功能，详情搜索pro_comment_format进行详细配置
+    # - lua_filter@*wanxiang/en_spacer               #启用时中文状态下输入英文单词后面自动追加空格
+    - lua_filter@*wanxiang/pro_comment_format      # 超级注释模块，支持错词提示、辅助码显示，部件组字读音注释，支持个性化配置和关闭相应的功能
     - lua_filter@*moqi/stick                       # tab置顶词回显在第一个comment中
+    - lua_filter@*auxcode/aux_code@flyup_aux_code  # 整句辅助码
     - uniquifier
 
 # 标点符号
@@ -204,7 +200,7 @@ others:
 # 按键绑定
 key_binder:
   import_preset: default
-  search: ";"  # 辅码引导符，要添加到 speller/alphabet
+  aux_code_trigger: ";"   # 辅码引导符，要添加到 speller/alphabet
   bindings:
     - { when: always, accept: Control+1, toggle: emoji }              # 切换是否显示 Emoji
     - { when: always, accept: Control+2, toggle: traditionalization } # 切换简繁
@@ -215,6 +211,8 @@ key_binder:
     # - { when: has_menu, accept: slash, send: 3 }
     - { when: has_menu, accept: "Tab", send: "Control+Right" }           # 使用 tab 在不同音节之间跳转
     - { when: composing, accept: "Tab", send: "Control+Right" }
+    - { when: has_menu, accept: "Shift_L+Tab", send: "Control+Left" }    # 使用 tab 在不同音节之间跳转
+    - { when: composing, accept: "Shift_L+Tab", send: "Control+Left" }
     - { match: "[a-z]{1,4}", accept: backslash,  send_sequence: "/1" }   # 简拼
 
 ################################## 前缀触发 #############################
@@ -328,6 +326,7 @@ translator:
   always_show_comments: true     # Rime 默认在 preedit 等于 comment 时取消显示 comment，这里强制一直显示，供pro_comment_format.lua做判断用。
   comment_format: {comment}      #将注释以词典字符串形式完全暴露，通过pro_comment_format.lua完全接管，灵活配置。
   preedit_format:                # preedit_format 影响到输入框的显示和“Shift+回车”上屏的字符
+    - xform/([a-z][a-z][a-z][a-z])o/$1°/
 
   enable_user_dict: true # 是否开启自动调频
   initial_quality: 1.2   # 拼音权重 1.2
@@ -339,7 +338,7 @@ custom_phrase:
   db_class: stabledb
   enable_completion: false
   enable_sentence: true
-  initial_quality: 1
+  initial_quality: 99
 
 melt_eng_in_cn:
   dictionary: melt_eng
@@ -356,7 +355,7 @@ custom_phrase_xh:
   db_class: stabledb
   enable_completion: false
   enable_sentence: false
-  initial_quality: 1
+  initial_quality: 99
 
 # 小鹤快符
 custom_phrase_kf:

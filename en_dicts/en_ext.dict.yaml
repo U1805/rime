@@ -14,6 +14,9 @@ sort: by_weight
 &nbsp;	&nbsp;
 .DS_Store	.DS_Store
 README.md	README.md
+project.yaml	project.yaml
+package.json	package.json
+requirements.txt	requirements.txt
 
 # 按键
 Fn	Fn
