@@ -1,7 +1,7 @@
 # 使用opencc/emoji.txt数据转换 转换脚本为https://github.com/gaboolic/rime-shuangpin-fuzhuma/program/emoji/deal_emoji_dict.py
 
 schema:
-  schema_id: emoji
+  schema_id: emojis
   name: Emoji
   version: "2024-05-26"
   description: |
@@ -74,7 +74,7 @@ speller:
     - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwrtyuiopsdfghjklzxcvbnm/
 
 translator:
-  dictionary: emoji
+  dictionary: emojis
   spelling_hints: 0
   comment_format:
 

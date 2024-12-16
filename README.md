@@ -11,6 +11,7 @@
 - 打词时插入鹤形作辅助码 ✎ eg. 寄宿 `jisub` 极速 `jimsu`
 - 单字辅助码增强(结尾添加o或/) ✎ eg. 森面 `sfmm` vs. 森 `sfmm/` / `sfmmo`
 - 在双拼输入末尾键入 `;` 激活[整句辅助](https://github.com/HowcanoeWang/rime-lua-aux-code)模式，键入 `'` 激活单字辅助模式
+- 更多的 emoji, 融合 [繪文字rime-emoji](https://github.com/rime/rime-emoji) 与 [Emoji与符号滤镜](https://github.com/rtransformation/rime-opencc_emoji_symbols/tree/master)
 - 优化英文输入体验，取自[雾凇拼音](https://dvel.me/posts/make-rime-en-better/)
 - 好看的皮肤 [win11_preset](https://github.com/LufsX/rime)
 - 万象语言模型、万象原子词库
@@ -77,7 +78,7 @@
 ## 文件说明
 
 - flypy_flypy: 小鹤双拼+鹤形辅助
-- emoji: ae 输入 emoji
+- emojis: ae 输入 emoji
 - japanese: aj 输入日语 (japanese)
 - melt_eng: aw 输入英语 (word)
 - pinyin_simp: ap 输入全拼 (pinyin)

@@ -18,7 +18,7 @@ schema:
   dependencies:
     - stroke
     - radical_pinyin
-    - emoji
+    - emojis
     - melt_eng
     - japanese
     - pinyin_simp
@@ -33,7 +33,6 @@ switches:
   - name: traditionalization
     states: [ 简, 繁 ]
   - name: emoji
-    reset: 0 # 默认状态: 0 关闭 1 开启
     states: [ 💀, 😄 ]
   - name: mars
     reset: 0
@@ -104,10 +103,10 @@ engine:
     - lua_filter@*moqi/reduce_emoji_filter   # 按需启用，作用是降低Emoji在候选项中的位置排序(顺序要求：Emoji > 降低排序)
     - reverse_lookup_filter@radical_reverse_lookup  # 部件拆字滤镜，放在pro_comment_format前面，进一步被超级注释处理以获得拼音编码+辅助码的提示
     - lua_filter@*wanxiang/pro_preedit_format      #输入码显示全拼并带上音调
-    - simplifier@emoji                             # Emoji
-    - simplifier@chinese_english                   # 中英词典
     - simplifier@traditionalize                    # 简繁切换
     - simplifier@mars                              # 火星文
+    - simplifier@emoji                             # Emoji
+    - simplifier@chinese_english                   # 中英词典
     - simplifier@others                            # 月份星期/符号/部首/人名/生僻字...
     - lua_filter@*ice/is_in_user_dict              # 用户词典的词加上一个*
     # - lua_filter@*wanxiang/en_spacer               #启用时中文状态下输入英文单词后面自动追加空格
@@ -176,7 +175,7 @@ emoji:
 traditionalize:
   option_name: traditionalization
   opencc_config: s2tw.json  # s2t.json | s2hk.json | s2tw.json | s2twp.json
-  tips: char               # 转换提示: all 都显示 | char 仅单字显示 | none 不显示。
+  tips: char                # 转换提示: all 都显示 | char 仅单字显示 | none 不显示。
   tags: [ abc, number, gregorian_to_lunar ]  # 限制在对应 tag，不对其他如反查的内容做简繁转换# 火星文切换
 
 # 火星文切换
@@ -188,7 +187,7 @@ mars:
 chinese_english:
   option_name: chinese_english
   opencc_config: chinese_english.json
-  tips: char
+  tips: all
   comment_format:
     - "xform/-/ /"
 
@@ -245,7 +244,7 @@ radical_reverse_lookup:
 
 emojis:
   tag: emojis
-  dictionary: emoji
+  dictionary: emojis
   enable_completion: true
   prefix: "ae"
   suffix: "'"
