@@ -1,13 +1,11 @@
 # Rime dictionary
 # encoding: utf-8
 #
-#
 # https://github.com/iDvel/rime-ice
 # ------- 补充的英文词汇 -------
-#
 ---
 name: en_ext
-version: "2024-06-10"
+version: "2024-12-27"
 sort: by_weight
 ...
 # 一些杂项
@@ -144,10 +142,10 @@ net	net	2
 
 # 带权重的系列
 iPhone	iPhone	999
-iPhone 15	iPhone	4
-iPhone 15 Plus	iPhone	3
-iPhone 15 Pro	iPhone	2
-iPhone 15 Pro Max	iPhone	1
+iPhone 16	iPhone	4
+iPhone 16 Plus	iPhone	3
+iPhone 16 Pro	iPhone	2
+iPhone 16 Pro Max	iPhone	1
 
 Mac OS X	MacOSX	999
 Mac OS X Cheetah	MacOSX	1
@@ -174,7 +172,7 @@ macOS Big Sur	macOS	5
 macOS Monterey	macOS	6
 macOS Ventura	macOS	7
 macOS Sonoma	macOS	8
-
+macOS Sequoia	macOS	8
 Windows	Windows	999
 Windows 95	Windows	1
 Windows 98	Windows	2
@@ -229,6 +227,10 @@ iPhone 15	iPhone15
 iPhone 15 Plus	iPhone15Plus
 iPhone 15 Pro	iPhone15Pro
 iPhone 15 Pro Max	iPhone15ProMax
+iPhone 16	iPhone16
+iPhone 16 Plus	iPhone16Plus
+iPhone 16 Pro	iPhone16Pro
+iPhone 16 Pro Max	iPhone16ProMax
 Mac OS X Cheetah	MacOSXCheetah
 Mac OS X Puma	MacOSXPuma
 Mac OS X Jaguar	MacOSXJaguar
@@ -249,6 +251,7 @@ macOS Big Sur	macOSBigSur
 macOS Monterey	macOSMonterey
 macOS Ventura	macOSVentura
 macOS Sonoma	macOSSonoma
+macOS Sequoia	macOSSequoia
 Windows 95	Windows95
 Windows 98	Windows98
 Windows Me	WindowsMe
@@ -265,6 +268,7 @@ ERC-1155	ERC-1155
 High Sierra	HighSierra
 Mojave	Mojave
 Big Sur	BigSur
+Sequoia	Sequoia
 TypeORM	TypeORM
 RPG	RPG
 Role-Playing Game	RPG
@@ -319,6 +323,9 @@ Chief Operating Officer	COO
 Chief Operating Officer	ChiefOperatingOfficer
 iShot	iShot
 TapTap	TapTap
+HDD	HDD
+Hard disk drive	HDD
+Hard disk drive	Harddiskdrive
 HHD	HHD
 Hybrid drive	HHD
 Hybrid drive	Hybriddrive
@@ -363,7 +370,11 @@ AlphaFold	AlphaFold
 Valve	Valve
 CS:GO	CS:GO
 Counter-Strike: Global Offensive	CS:GO
+Counter-Strike: Global Offensive	Counter-Strike:GlobalOffensive
 Counter-Strike	Counter-Strike
+Counter-Strike 2	Counter-Strike2
+CS2	CS2
+Counter-Strike 2	CS2
 Tesla	Tesla
 Polo	Polo
 Code Runner	CodeRunner
@@ -737,6 +748,8 @@ Instacast	Instacast
 Instashare	Instashare
 Intensify	Intensify
 IP	IP
+internet protocol	IP
+internet protocol	internetprotocol
 iPack	iPack
 iPad Air	iPadAir
 iPad mini	iPadmini
@@ -1197,11 +1210,6 @@ New Technology File System	NewTechnologyFileSystem
 Microsoft NTFS	NTFS
 Microsoft NTFS	MicrosoftNTFS
 ChromeOS	ChromeOS
-GCD	GCD
-Grand Central Dispatch	GCD
-Grand Central Dispatch	GrandCentralDispatch
-greatest common divisor	GCD
-greatest common divisor	Greatestcommondivisor
 Ed Sheeran	EdSheeran
 Sheeran	Sheeran
 Cloudflare Images	CloudflareImages
@@ -1217,7 +1225,7 @@ Non-Player Character	Non-PlayerCharacter
 MVP	MVP
 Quantumult X	QuantumultX
 Confluence	Confluence
-Skynet	Skynet
+skynet	skynet
 serverless	serverless
 Identifier	Identifier
 NameCheap	NameCheap
@@ -2156,3 +2164,33 @@ Microsoft Visual C++	MSVC
 Microsoft Visual C++	MicrosoftVisualC++
 DBeaver	DBeaver
 Vite	Vite
+AE86	AE86
+Floorp	Floorp
+Costco	Costco
+NFC	NFC
+Near Field Communication	NFC
+Near Field Communication	NearFieldCommunication
+Apple Intelligence	AppleIntelligence
+7-Zip	7-Zip
+LGTM	LGTM
+PTAL	PTAL
+GPT-4o	GPT-4o
+Grok	Grok
+MBR	MBR
+master boot record	masterbootrecord
+master boot record	MBR
+EFI	EFI
+Extensible Firmware Interface	ExtensibleFirmwareInterface
+Extensible Firmware Interface	EFI
+UEFI	UEFI
+Unified Extensible Firmware Interface	UnifiedExtensibleFirmwareInterface
+Unified Extensible Firmware Interface	UEFI
+CMOS	CMOS
+complementary metal-oxide-semiconductor	complementarymetal-oxide-semiconductor
+complementary metal-oxide-semiconductor	CMOS
+OOP	OOP
+object-oriented programming	object-orientedprogramming
+object-oriented programming	OOP
+IDE	IDE
+integrated development environment	integrateddevelopmentenvironment
+integrated development environment	IDE
