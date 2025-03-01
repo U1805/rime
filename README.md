@@ -31,7 +31,7 @@
 
 ### 关键词触发
 
-- 日期时间相关：`date` `time` `week` `datetime` `timestamp` `lunar` `month`
+- 日期时间相关：`date` `time` `week` `weeknum` `datetime` `timestamp` `lunar` `solarterm` `holiday` `day`
 - 生成 UUID：`uuid`
 - o开头快速输入各种符号偏旁部件 [小鹤 · 符号](https://flypy.cc/#/fh)
 - 小鹤直通车[功能实现](https://github.com/kchen0x/rime-crane)，见 [shortcut](./lua/xhup/shortcut_translator.lua)

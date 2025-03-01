@@ -5,7 +5,7 @@
 schema:
   schema_id: flypy_flypy
   name: 小鹤双拼
-  version: "2024-11-23"
+  version: "2025-03-01"
   author:
     - Functoreality
     - Dvel
@@ -89,8 +89,9 @@ engine:
     - script_translator@melt_eng             # 临时单词输入
     - script_translator@japanese             # 临时日语输入
     - lua_translator@*melt
-    - lua_translator@*ice/date_translator    # 时间、日期、星期
-    - lua_translator@*ice/lunar              # 农历
+    - lua_translator@*wanxiang/shijian       # 时间、日期、星期、农历、节气、时辰等等
+    # - lua_translator@*ice/date_translator    # 时间、日期、星期
+    # - lua_translator@*ice/lunar              # 农历
     - lua_translator@*ice/unicode            # Unicode
     - lua_translator@*ice/number_translator  # 数字、金额大写
     - lua_translator@*moqi/calculator        # 计算器
@@ -128,7 +129,7 @@ octagram:
     grammar:
       language: wanxiang-lts-zh-hans
       collocation_max_length: 8         #命中的最长词组
-      collocation_min_length: 3         #命中的最短词组，搭配词频健全的词库时候应当最小值设为3避开2字高频词
+      collocation_min_length: 2         #命中的最短词组，搭配词频健全的词库时候应当最小值设为3避开2字高频词
       collocation_penalty: -10          #默认-12 对常见搭配词组施加的惩罚值。较高的负值会降低这些搭配被选中的概率，防止过于频繁地出现某些固定搭配。
       non_collocation_penalty: -12      #默认-12 对非搭配词组施加的惩罚值。较高的负值会降低非搭配词组被选中的概率，避免不合逻辑或不常见的词组组合。
       weak_collocation_penalty: -24     #默认-24 对弱搭配词组施加的惩罚值。保持默认值通常是为了有效过滤掉不太常见但仍然合理的词组组合。
@@ -152,7 +153,7 @@ pro_comment_format:            # 超级注释模块，子项配置 true 开启�
 
 speller:
   # 三字母及以上唯一码直接上屏
-  auto_select: true
+  auto_select: false
   auto_select_pattern: ^[a-z]+/|^[a-df-zA-DF-Z]\w{2,}|^e\w{3,} 
   # 如果不想让什么标点直接上屏，可以加在 alphabet，或者编辑标点符号为两个及以上的映射
   alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/`;'
@@ -163,9 +164,9 @@ speller:
   algebra:
     __patch:
       - set_shuru_schema     #拼音转双拼码
-      - wanxiang:/mohuyin              #模糊音选择性开启
+      - wanxiang:/mohuyin    #模糊音选择性开启
       - set_algebra_fuzhu    #辅助码部分
-      - wanxiang:/wannengma            #万能码选择性开启
+      - wanxiang:/wannengma  #万能码选择性开启
 
 ################################## 快捷键触发 #############################
 
