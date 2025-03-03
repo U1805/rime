@@ -1,0 +1,13 @@
+-- config.lua
+-- This file contains sensitive configuration data
+-- Add this file to .gitignore to prevent accidental commits
+
+local config = {}
+
+-- API config
+config.LLM_URL = "https://api.deepseek.com/chat/completions"
+config.LLM_TOKEN = "YOUR_API_KEY_HERE"  -- Replace with your actual token
+config.DEEPLX_URL = "YOUR_DEEPLX_URL_HERE"  -- Replace with your actual url
+
+
+return config

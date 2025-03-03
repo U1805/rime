@@ -27,4 +27,6 @@ build/
 
 # 用户自定义配置
 /default.custom.yaml
+/weasel.custom.yaml
 /custom_phrase.txt
+/**/*/config.lua
