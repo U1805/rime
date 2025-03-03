@@ -102,8 +102,7 @@ local function filter(input, env)
       for cand in input:iter() do
          if count < 3 then
             if count == 0 then
-               -- yield(cand)
-               yield(Candidate("request", 0, codeLen, cand.text, cand.text))
+               yield(cand)
             elseif count == 1 then
                yield(Candidate("request", 0, codeLen, "输入t调用翻译", cand.comment))
             elseif count == 2 then

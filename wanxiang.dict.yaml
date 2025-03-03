@@ -24,7 +24,7 @@ import_tables:
   # - cn_dicts/people          #人名词库
   # - cn_dicts/place           #行政区划
 
-  - jm_dicts/chengyu  # 简拼四字成语
+  - cn_dicts/jm_dicts/chengyu  # 简拼四字成语
 
   # 维基词库 https://github.com/felixonmars/fcitx5-pinyin-zhwiki、https://github.com/outloudvi/mw2fcitx
   # 细胞词库 https://github.com/Bambooin/rimerc
