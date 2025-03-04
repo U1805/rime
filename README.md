@@ -11,7 +11,7 @@
 - 打词时插入鹤形作辅助码 ✎ eg. 寄宿 `jisub` 极速 `jimsu`
 - 单字辅助码增强(结尾添加o或/) ✎ eg. 森面 `sfmm` vs. 森 `sfmm/` / `sfmmo`
 - 在双拼输入末尾键入 `;` 激活[整句辅助](https://github.com/HowcanoeWang/rime-lua-aux-code)模式，键入 `'` 激活单字辅助模式
-- 末尾键入 `''t` 调用 DeepLX 翻译，键入 `''l` 调用大模型问答（相关配置在 lua/config.lua 中）
+- 末尾键入 `''t` 调用 DeepLX 翻译，键入 `''l` 调用大模型问答，键入 `''i` 调用文生图
 - 更多的 emoji, 融合 [繪文字rime-emoji](https://github.com/rime/rime-emoji) 与 [Emoji与符号滤镜](https://github.com/rtransformation/rime-opencc_emoji_symbols/tree/master)
 - 优化英文输入体验，取自[雾凇拼音](https://dvel.me/posts/make-rime-en-better/)
 - 好看的皮肤 [win11_preset](https://github.com/LufsX/rime)
@@ -45,7 +45,7 @@
 - `/` 开头符号输入 ，`/help` 查看帮助，另支持[常用 Latex 符号](https://github.com/wklchris/Rime-latex-symbols) 
 - `'` 快符： 通过单引号键引导的26字母快速符号自动上屏，双击''重复上一个符号
 - `;` 快符： 双击;;重复上屏汉字和字母
-- `Control+y` 云输入功能：复制[simplehttp.dll](https://github.com/hchunhui/librime-cloud)，在输入状态下触发云输入
+- `Control+y` 云输入功能：百度输入法联想，取自[librime-cloud](https://github.com/hchunhui/librime-cloud)
 - `Shift + Del` 可以删除错误词频 
 - `Shift + ⌫` 可以删除单个汉字的拼音
 
@@ -75,6 +75,8 @@
 
 榆井希实	yujkxiui
 ```
+
+- 调动 DeepLX 翻译、调用大模型、调用云输入功能需要复制[simplehttp.dll](https://github.com/hchunhui/librime-cloud)，其相关配置在 lua/config.lua 中
 
 ## 文件说明
 
