@@ -115,10 +115,49 @@ local function filter(input, env)
       end
    elseif code:sub(-3) == "''t" then
       for cand in input:iter() do
+         if count == 0 then
+            yield(cand)
+         elseif count == 1 then
+            yield(Candidate("request", 0, codeLen, "输入e翻译英文", cand.comment))
+         elseif count == 2 then
+            yield(Candidate("request", 0, codeLen, "输入c翻译中文", cand.comment))
+         elseif count == 3 then
+            yield(Candidate("request", 0, codeLen, "输入j翻译日文", cand.comment))
+         else
+            yield(cand)
+         end
+         count = count + 1
+      end
+   elseif code:sub(-4) == "''te" then
+      for cand in input:iter() do
          if count < 3 then
             count = count + 1
             -- Get the text from the candidate
             local text = call_translate_api(cand.text, "auto", "en")
+            cand.comment = "🤖"
+            yield(Candidate("translate", 0, codeLen, text, cand.comment))
+         else
+            yield(cand)
+         end
+      end
+   elseif code:sub(-4) == "''tj" then
+      for cand in input:iter() do
+         if count < 3 then
+            count = count + 1
+            -- Get the text from the candidate
+            local text = call_translate_api(cand.text, "auto", "ja")
+            cand.comment = "🤖"
+            yield(Candidate("translate", 0, codeLen, text, cand.comment))
+         else
+            yield(cand)
+         end
+      end
+   elseif code:sub(-4) == "''tc" then
+      for cand in input:iter() do
+         if count < 3 then
+            count = count + 1
+            -- Get the text from the candidate
+            local text = call_translate_api(cand.text, "auto", "zh")
             cand.comment = "🤖"
             yield(Candidate("translate", 0, codeLen, text, cand.comment))
          else

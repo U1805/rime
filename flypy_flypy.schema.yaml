@@ -300,7 +300,7 @@ recognizer:
     ## 临时输入
     emojis: "^ae[a-z]*'?$"
     melt_eng: "^aw[A-Za-z]*"
-    japanese: "^aj[a-z]*"
+    japanese: "^aj[a-z']*"
     pinyin: "^ap[a-z]*'?$"
     ## 功能
     calculator: "^V.*$"                 # 计算器需要用

@@ -6,6 +6,12 @@
 
 小鹤双拼+鹤形辅助+英日输入
 
+## 使用配置
+
+- 自定义词库：在根目录新建 `custom_phrase.txt` 文件
+- 翻译、大模型：复制[simplehttp.dll](https://github.com/hchunhui/librime-cloud)，配置 `lua/config.lua` 中
+
+
 ## 特性
 
 - 打词时插入鹤形作辅助码 ✎ eg. 寄宿 `jisub` 极速 `jimsu`
@@ -59,24 +65,6 @@
   - `ctrl+3` 中英互译开关
   - `ctrl+4` 声调开关
   - `ctrl+5` 辅助码开关
-- 自定义词库在根目录新建 `custom_phrase.txt` 文件
-
-```
-# Rime table
-# coding: utf-8
-#
-# 请将该文件以UTF-8编码保存为
-# Rime用户文件夹/custom_phrase.txt
-#
-# 码表各字段以制表符（Tab）分隔
-# 顺序为：文字、编码、权重（决定重码的次序、可选）
-#
-# 虽然文本码表编辑较为方便，但不适合导入大量条目
-
-榆井希实	yujkxiui
-```
-
-- 调动 DeepLX 翻译、调用大模型、调用云输入功能需要复制[simplehttp.dll](https://github.com/hchunhui/librime-cloud)，其相关配置在 lua/config.lua 中
 
 ## 文件说明
 

@@ -31,6 +31,7 @@ import_tables:
   # 细胞词库 https://github.com/thunlp/THUOCL
   - cn_dicts/cell/moegirl
   - cn_dicts/cell/luna_pinyin.computer
+  - cn_dicts/cell/sogou_net
 ...
 
 

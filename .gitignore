@@ -30,3 +30,4 @@ build/
 /weasel.custom.yaml
 /custom_phrase.txt
 /**/*/config.lua
+__pycache__
