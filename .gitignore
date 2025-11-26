@@ -31,3 +31,5 @@ build/
 /custom_phrase.txt
 /**/*/config.lua
 __pycache__
+
+.notepad

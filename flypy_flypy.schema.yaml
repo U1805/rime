@@ -22,6 +22,7 @@ schema:
     - melt_eng
     - japanese
     - pinyin_simp
+    - mixedcode  #中英文混合词汇
 
 switches:
   - name: ascii_mode
@@ -74,7 +75,7 @@ engine:
   translators:
     - punct_translator
     - table_translator@custom_phrase
-    - table_translator@melt_eng_in_cn
+    - table_translator@mixedcode  #中英等混合词汇表导入
     - table_translator@custom_phrase_xh
     - table_translator@custom_phrase_kf
     - table_translator@custom_phrase_xhzg
@@ -142,10 +143,6 @@ octagram:
 
 ################################## 方案组合 #############################
 
-set_shuru_schema:           #配置此项就是选择什么输入法,同时拆分反查和中英文混输也将匹配该输入方案
-  __include: wanxiang:/algebra_flypy  #可选解码规则有   algebra_pinyin, algebra_zrm, algebra_flypy,  algebra_ziguang, algebra_sogou, algebra_mspy, algebra_abc  选择一个填入
-set_algebra_fuzhu:          #配置此项就是选择什么辅助码
-  __include: wanxiang:/fuzhu_flypy    #可选辅助码有：fuzhu_kong，fuzhu_moqi, fuzhu_zrm, fuzhu_flypy, fuzhu_tiger, fuzhu_cj, fuzhu_wubi, fuzhu_jdh, fuzhu_hanxin 选择一个填入
 pro_comment_format:            # 超级注释模块，子项配置 true 开启，false 关闭
   fuzhu_code: true             # 启用辅助码提醒，用于辅助输入练习辅助码，成熟后可关闭
   candidate_length: 1          # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理    
@@ -164,10 +161,10 @@ speller:
   delimiter: " "
   algebra:
     __patch:
-      - set_shuru_schema     #拼音转双拼码
-      - wanxiang:/mohuyin    #模糊音选择性开启
-      - set_algebra_fuzhu    #辅助码部分
-      - wanxiang:/wannengma  #万能码选择性开启
+      - wanxiang:/algebra_flypy     #拼音转双拼码
+      - wanxiang:/mohuyin           #模糊音选择性开启
+      - wanxiang:/fuzhu_flypy       #辅助码部分
+      - wanxiang:/wannengma         #万能码选择性开启
 
 ################################## 快捷键触发 #############################
 
@@ -345,13 +342,14 @@ custom_phrase:
   enable_sentence: true
   initial_quality: 99
 
-melt_eng_in_cn:
-  dictionary: melt_eng
-  enable_sentence: false   # 禁止造句
-  enable_user_dict: false  # 禁用用户词典
-  initial_quality: 1.1     # 英文权重 1.1
-  comment_format:          # 自定义提示码
-    - xform/.*//           # 清空提示码（就是没有那个小尾巴）
+mixedcode:
+  dictionary: mixedcode
+  db_class: stabledb
+  enable_completion: true
+  enable_sentence: false
+  initial_quality: 1.1
+  comment_format:
+    - xform/^.+$//
 
 # 小鹤简码
 custom_phrase_xh:
