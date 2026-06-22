@@ -9,7 +9,7 @@
 ## 使用配置
 
 - 自定义词库：在根目录新建 `custom_phrase.txt` 文件
-- 翻译、大模型：复制[simplehttp.dll](https://github.com/hchunhui/librime-cloud)，配置 `lua/config.lua` 中
+<!-- - 翻译、大模型：复制[simplehttp.dll](https://github.com/hchunhui/librime-cloud)，配置 `lua/config.lua` 中 -->
 
 
 ## 特性
@@ -17,7 +17,7 @@
 - 打词时插入鹤形作辅助码 ✎ eg. 寄宿 `jisub` 极速 `jimsu`
 - 单字辅助码增强(结尾添加o或/) ✎ eg. 森面 `sfmm` vs. 森 `sfmm/` / `sfmmo`
 - 在双拼输入末尾键入 `;` 激活[整句辅助](https://github.com/HowcanoeWang/rime-lua-aux-code)模式，键入 `'` 激活单字辅助模式
-- 末尾键入 `''t` 调用 DeepLX 翻译，键入 `''l` 调用大模型问答，键入 `''i` 调用文生图
+<!-- - 末尾键入 `''t` 调用 DeepLX 翻译，键入 `''l` 调用大模型问答，键入 `''i` 调用文生图 -->
 - 更多的 emoji, 融合 [繪文字rime-emoji](https://github.com/rime/rime-emoji) 与 [Emoji与符号滤镜](https://github.com/rtransformation/rime-opencc_emoji_symbols/tree/master)
 - 优化英文输入体验，取自[雾凇拼音](https://dvel.me/posts/make-rime-en-better/)
 - 好看的皮肤 [win11_preset](https://github.com/LufsX/rime)

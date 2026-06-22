@@ -1,7 +1,7 @@
 # Rime default settings
 # encoding: utf-8
 
-config_version: '0.40'
+config_version: '0.55'
 
 schema_list:
   - schema: flypy_flypy # 小鹤+鹤形

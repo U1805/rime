@@ -1,4 +1,5 @@
 -- https://github.com/HowcanoeWang/rime-lua-aux-code/blob/main/lua/aux_code.lua
+-- 2026-06-22: 修复 Lua 5.5 循环变量只读 + error() 硬崩溃
 
 local AuxFilter = {}
 
@@ -8,7 +9,17 @@ local AuxFilter = {}
 function AuxFilter.init(env)
     -- log.info("** AuxCode filter", env.name_space)
 
-    AuxFilter.aux_code = AuxFilter.readAuxTxt(env.name_space)
+    local aux_code, missing_path, missing_file = AuxFilter.readAuxTxt(env.name_space)
+    if aux_code then
+        AuxFilter.aux_code = aux_code
+        env.aux_ready = true
+        env.aux_error_msg = nil
+    else
+        -- 文件缺失时静默降级，不 crash
+        AuxFilter.aux_code = {}
+        env.aux_ready = false
+        env.aux_error_msg = "(⚠️ 未找到辅码文件: " .. (missing_file or (env.name_space .. ".txt")) .. ")"
+    end
 
     local engine = env.engine
     local config = engine.schema.config
@@ -64,6 +75,7 @@ end
 
 ----------------
 -- 閱讀輔碼文件 --
+-- 修复：文件不存在时返回 nil 而非 error()
 ----------------
 function AuxFilter.readAuxTxt(txtpath)
     if AuxFilter.cache then
@@ -78,13 +90,14 @@ function AuxFilter.readAuxTxt(txtpath)
 
     local file = io.open(fileAbsolutePath, "r") or io.open(userPath .. defaultFile, "r")
     if not file then
-        error("Unable to open auxiliary code file.")
-        return {}
+        -- 修复：不再 error()，返回 nil 让 init 做优雅降级
+        return nil, fileAbsolutePath, txtpath .. ".txt"
     end
 
     local auxCodes = {}
-    for line in file:lines() do
-        line = line:match("[^\r\n]+") -- 去掉換行符，不然 value 是帶著 \n 的
+    -- 修复 Lua 5.5: 循环变量 _line 只读，用 local line 拷贝
+    for _line in file:lines() do
+        local line = _line:match("[^\r\n]+") -- 去掉換行符，不然 value 是帶著 \n 的
         local key, value = line:match("([^=]+)=(.+)") -- 分割 = 左右的變數
         if key and value then
             auxCodes[key] = auxCodes[key] or {}
@@ -146,6 +159,7 @@ end
 function AuxFilter.fullAux(env, word)
     local fullAuxCodes = {}
     -- log.info('候选词：', word)
+    -- codePoint 在循环体内只读不写，Lua 5.5 安全
     for _, codePoint in utf8.codes(word) do
         local char = utf8.char(codePoint)
         local charAuxCodes = AuxFilter.aux_code[char] -- 每個字的輔助碼組
@@ -190,6 +204,7 @@ end
 
 ------------------
 -- filter 主函數 --
+-- 修复 Lua 5.5: 循环变量 _cand 只读，用 local cand 拷贝
 ------------------
 function AuxFilter.func(input, env)
     local context = env.engine.context
@@ -200,8 +215,22 @@ function AuxFilter.func(input, env)
 
     -- 判断字符串中是否包含輔助碼分隔符
     if not string.find(inputCode, env.trigger_key) then
-        -- 没有输入辅助码引导符，则直接yield所有待选项，不进入后续迭代，提升性能
-        for cand in input:iter() do
+        -- 没有输入辅助码引导符，则直接yield所有待选项
+        for _cand in input:iter() do
+            local cand = _cand
+            -- 文件缺失时在第一个候选词注释中提示
+            if env.aux_error_msg and not env._hint_shown then
+                env._hint_shown = true
+                if cand:get_dynamic_type() == "Shadow" then
+                    local originalCand = cand:get_genuine()
+                    local shadowText = cand.text
+                    local shadowComment = cand.comment or ""
+                    cand = ShadowCandidate(originalCand, originalCand.type, shadowText,
+                        (originalCand.comment or "") .. shadowComment .. env.aux_error_msg)
+                else
+                    cand.comment = (cand.comment or "") .. env.aux_error_msg
+                end
+            end
             yield(cand)
         end
         return
@@ -214,11 +243,18 @@ function AuxFilter.func(input, env)
             -- log.info('re.match ' .. local_split)
         end
 
-        -- 更新逻辑：没有匹配上就不出现再候选框里，提升性能
-        -- local insertLater = {}
+        -- 文件缺失时直接透传，不做过滤
+        if not env.aux_ready then
+            for _cand in input:iter() do
+                local cand = _cand
+                yield(cand)
+            end
+            return
+        end
 
         -- 遍歷每一個待選項
-        for cand in input:iter() do
+        for _cand in input:iter() do
+            local cand = _cand
             local auxCodes = AuxFilter.aux_code[cand.text] -- 僅單字非 nil
             local fullAuxCodes = AuxFilter.fullAux(env, cand.text)
 
@@ -252,24 +288,19 @@ function AuxFilter.func(input, env)
                 -- 匹配到辅助码的待选项，直接插入到候选框中( 获得靠前的位置 )
                 yield(cand)
             else
-                -- 待选项字词 没有 匹配到当前的辅助码，插入到列表中，最后插入到候选框里( 获得靠后的位置 )
-                -- table.insert(insertLater, cand)
+                -- 待选项字词 没有 匹配到当前的辅助码
                 -- 更新逻辑：没有匹配上就不出现再候选框里，提升性能
             end
         end
-
-        -- 把沒有匹配上的待選給添加上
-        -- for _, cand in ipairs(insertLater) do
-        --     yield(cand)
-        -- end
-        -- 更新逻辑：没有匹配上就不出现再候选框里，提升性能
         
     end
 
 end
 
 function AuxFilter.fini(env)
-    env.notifier:disconnect()
+    if env.notifier then
+        env.notifier:disconnect()
+    end
 end
 
 return AuxFilter

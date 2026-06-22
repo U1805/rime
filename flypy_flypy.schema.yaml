@@ -51,7 +51,7 @@ engine:
     - lua_processor@*wanxiang/quick_symbol_text    # 快符引导以及重复上屏
     - lua_processor@*moqi/key_binder               # 绑定按键扩展能力match
     - lua_processor@*crane/shortcut_processor      # 小鹤直通车
-    - lua_processor@*cloud/baidu_processor         # 云输入
+    # - lua_processor@*cloud/baidu_processor         # 云输入（Windows only: simplehttp.dll）
     - ascii_composer
     - recognizer
     - key_binder
@@ -97,7 +97,7 @@ engine:
     - lua_translator@*ice/number_translator  # 数字、金额大写
     - lua_translator@*moqi/calculator        # 计算器
     - lua_translator@*crane/shortcut_translator  # 小鹤直通车
-    - lua_translator@*cloud/baidu_translator # 云输入
+    # - lua_translator@*cloud/baidu_translator # 云输入（Windows only: simplehttp.dll）
     - lua_translator@*wanxiang/force_gc      # 暴力 GC 降低内存
   filters:
     - lua_filter@*ice/long_word_filter       # 长词优先（顺序要求：长词优先 > Emoji）
@@ -115,7 +115,7 @@ engine:
     - lua_filter@*wanxiang/pro_comment_format      # 超级注释模块，支持错词提示、辅助码显示，部件组字读音注释，支持个性化配置和关闭相应的功能
     - lua_filter@*moqi/stick                       # tab置顶词回显在第一个comment中
     - lua_filter@*auxcode/aux_code@flyup_aux_code  # 整句辅助码
-    - lua_filter@*request                          # 联网翻译与大模型问答 '' 触发
+    # - lua_filter@*request                          # 联网翻译与大模型问答（Windows only: simplehttp.dll）
     - uniquifier
 
 # 标点符号
