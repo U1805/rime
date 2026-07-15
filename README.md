@@ -18,7 +18,7 @@
 - 打词时插入鹤形作辅助码 ✎ eg. 寄宿 `jisub` 极速 `jimsu`
 - 单字辅助码增强(结尾添加o或/) ✎ eg. 森面 `sfmm` vs. 森 `sfmm/` / `sfmmo`
 - 在双拼输入末尾键入 `;` 激活[整句辅助](https://github.com/HowcanoeWang/rime-lua-aux-code)模式，键入 `'` 激活单字辅助模式
-- 更多的 emoji, 融合 [Emojiall](https://www.emojiall.com/zh-hans), [繪文字rime-emoji](https://github.com/rime/rime-emoji) 与 [Emoji与符号滤镜](https://github.com/rtransformation/rime-opencc_emoji_symbols/tree/master)
+- 更多的 emoji 🤗, 融合 [Emojiall](https://www.emojiall.com/zh-hans), [繪文字rime-emoji](https://github.com/rime/rime-emoji) 与 [Emoji与符号滤镜](https://github.com/rtransformation/rime-opencc_emoji_symbols/tree/master)
 - 优化英文输入体验，取自[雾凇拼音](https://dvel.me/posts/make-rime-en-better/)
 - 好看的皮肤 [win11_preset](https://github.com/LufsX/rime)
 - 万象语言模型、万象原子词库
@@ -40,6 +40,7 @@
 ### 关键词触发
 
 - 日期时间相关：`date` `time` `week` `weeknum` `datetime` `timestamp` `lunar` `solarterm` `holiday` `day`
+- 输入统计相关：`stats`
 - 生成 UUID：`uuid`
 - o开头快速输入各种符号偏旁部件 [小鹤 · 符号](https://flypy.cc/#/fh)
 - 小鹤直通车[功能实现](https://github.com/kchen0x/rime-crane)，见 [shortcut](./lua/xhup/shortcut_translator.lua)

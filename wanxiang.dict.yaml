@@ -32,11 +32,10 @@ import_tables:
   - dicts/fangyan         #收集全国方言
 
   # 维基词库 https://github.com/felixonmars/fcitx5-pinyin-zhwiki、https://github.com/outloudvi/mw2fcitx
-  # https://github.com/suiginko/moetype
   # 细胞词库 https://github.com/Bambooin/rimerc
   # 细胞词库 https://github.com/thunlp/THUOCL
   # - dicts/cell/moegirl
-  - dicts/cell/tone_moe
+  - dicts/cell/flypy_moe # https://github.com/suiginko/moetype
   - dicts/cell/luna_pinyin.computer
   - dicts/cell/sogou_net
 ...

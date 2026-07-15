@@ -17,9 +17,9 @@ function M.func(input, env)
             cand.comment = cand.comment .. '*'
         end
         -- 用户置顶词
-        -- if cand.type == "user_table" then
-        --     cand.comment = cand.comment .. '⚡️'
-        -- end
+        if cand.type == "user_table" then
+            cand.comment = cand.comment .. '⚡️'
+        end
 
         -- 整句联想，加上𑄗符号
         if cand.type == 'sentence' then
