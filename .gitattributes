@@ -1,0 +1,2 @@
+*.py linguist-vendored=true
+*.json linguist-vendored=true

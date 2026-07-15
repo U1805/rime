@@ -2,7 +2,7 @@
 # - LufsX
 # https://github.com/LufsX/rime/blob/master/tools/update_sogou.py
 
-from scel2dict import SougouScelReader, SougouScelDownloader
+from scripts.scel2dict import SougouScelReader, SougouScelDownloader
 import os
 import sys
 import urllib.parse
