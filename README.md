@@ -2,7 +2,7 @@
 
 ![](./scripts/image.jpg)
 
-本配置方案基于 [万象系列方案](https://github.com/amzxyz/rime_wanxiang_pro) 修改
+本配置方案基于 [墨奇音形](https://github.com/gaboolic/rime-shuangpin-fuzhuma) 与 [万象方案](https://github.com/amzxyz/rime_wanxiang_pro) 修改
 
 小鹤双拼+鹤形辅助+英日输入
 

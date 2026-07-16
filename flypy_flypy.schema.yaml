@@ -102,6 +102,7 @@ engine:
     - lua_translator@*wanxiang/force_gc      # 暴力 GC 降低内存
   filters:
     - lua_filter@*ice/long_word_filter       # 长词优先（顺序要求：长词优先 > Emoji）
+    - lua_filter@*ice/long_word_filter_emoji # 长码优先 for 〔Emoji〕 mode
     - lua_filter@*ice/autocap_filter         # 英文自动大写
     - lua_filter@*moqi/reduce_emoji_filter   # 按需启用，作用是降低Emoji在候选项中的位置排序(顺序要求：Emoji > 降低排序)
     - reverse_lookup_filter@radical_reverse_lookup  # 部件拆字滤镜，放在pro_comment_format前面，进一步被超级注释处理以获得拼音编码+辅助码的提示
